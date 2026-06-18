@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meetings & Conferences — Veranda Hotels & Resorts</title>
+  <meta name="description" content="Host world-class meetings, conferences, weddings and banquets at Veranda Hotels & Resorts. Spaces for 20 to 5,000 guests across India's finest properties.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="styles/global.css">
+  <style>
+    /* ─── Page hero ─────────────────────────────────────────── */
+    .meetings-hero {
+      height: 420px;
+      background: url('https://images.unsplash.com/photo-1505369711698-e4ac83783a3d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover;
+      display: flex;
+      align-items: flex-end;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .meetings-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.6); /* replaced radial */
+                  radial-gradient(ellipse at 80% 20%, rgba(201,168,76,0.08) 0%, transparent 50%);
+    }
+
+    /* Grid pattern overlay */
+    .meetings-hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+
+    .meetings-hero__content {
+      position: relative;
+      z-index: 1;
+      padding: var(--space-xl);
+    }
+
+    .meetings-hero__eyebrow {
+      font-family: var(--font-heading);
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--clr-accent);
+      margin-bottom: var(--space-sm);
+    }
+
+    .meetings-hero__title {
+      font-family: var(--font-heading);
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--clr-white);
+      line-height: 1;
+    }
+
+    .meetings-hero__sub {
+      font-family: var(--font-script);
+      font-style: italic;
+      font-size: 1.4rem;
+      color: rgba(201,168,76,0.85);
+      font-weight: 300;
+      margin-top: var(--space-sm);
+    }
+
+    /* ─── Meetings intro section ─────────────────────────────── */
+    .meetings-intro {
+      background: var(--clr-white);
+    }
+
+    /* ─── Form card ──────────────────────────────────────────── */
+    .form-card {
+      background: var(--clr-bg);
+      border-radius: var(--radius-md);
+      padding: var(--space-lg) var(--space-lg);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .form-card__title {
+      font-family: var(--font-heading);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--clr-teal);
+      margin-bottom: var(--space-lg);
+      padding-bottom: var(--space-sm);
+      border-bottom: 1px solid rgba(139,69,19,0.2);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-md);
+    }
+
+    /* ─── Form success state ─────────────────────────────────── */
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: var(--space-xl) var(--space-md);
+    }
+
+    .form-success.show {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-md);
+    }
+
+    .form-success__icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: var(--clr-logo);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .form-success__icon svg {
+      width: 32px;
+      height: 32px;
+      color: white;
+    }
+
+    /* ─── Icon grid section ──────────────────────────────────── */
+    .section-specs {
+      background: var(--clr-offwhite);
+    }
+
+    /* ─── Venue images grid ──────────────────────────────────── */
+    .venues-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      grid-template-rows: 260px 260px;
+      gap: 8px;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      margin-bottom: var(--space-xl);
+    }
+
+    .venue-tile {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .venue-tile:first-child {
+      grid-row: 1 / 3;
+    }
+
+    .venue-tile-bg {
+      width: 100%;
+      height: 100%;
+      transition: transform 0.6s ease;
+    }
+
+    .venue-tile:hover .venue-tile-bg {
+      transform: scale(1.05);
+    }
+
+    .venue-tile__label {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 100%);
+      padding: 1rem 0.75rem 0.75rem;
+      font-family: var(--font-heading);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: white;
+    }
+
+    /* ─── Full-bleed banner ──────────────────────────────────── */
+    .meetings-banner {
+      position: relative;
+      height: 540px;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+    }
+
+    .meetings-banner__bg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #1C1008 0%, #2A1808 40%, #1C1008 100%);
+    }
+
+    /* Dot grid pattern */
+    .meetings-banner__bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, rgba(201,168,76,0.12) 1px, transparent 1px);
+      background-size: 30px 30px;
+    }
+
+    .meetings-banner__overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to right,
+        rgba(0,0,0,0.72) 0%,
+        rgba(0,0,0,0.4) 50%,
+        transparent 100%
+      );
+    }
+
+    .meetings-banner__content {
+      position: relative;
+      z-index: 1;
+      padding: var(--space-xl);
+      max-width: 640px;
+    }
+
+    .meetings-banner__kicker {
+      font-family: var(--font-heading);
+      font-size: 0.6rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--clr-accent);
+      margin-bottom: var(--space-sm);
+    }
+
+    .meetings-banner__headline {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: white;
+      line-height: 0.95;
+      margin-bottom: var(--space-md);
+    }
+
+    .meetings-banner__headline .big {
+      display: block;
+      font-size: clamp(4rem, 10vw, 8rem);
+    }
+
+    .meetings-banner__headline .small {
+      display: block;
+      font-size: clamp(1.2rem, 2.5vw, 2rem);
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      margin-top: 0.25rem;
+    }
+
+    .meetings-banner__sub {
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.65;
+      max-width: 380px;
+      margin-bottom: var(--space-md);
+    }
+
+    @media (max-width: 768px) {
+      .form-row { grid-template-columns: 1fr; }
+      .venues-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+      }
+      .venue-tile:first-child { grid-row: auto; }
+    }
+
+    @media (max-width: 600px) {
+      .meetings-hero { height: 320px; }
+      .meetings-banner { height: 440px; }
+      .venues-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%235C3320'/><text x='50' y='70' font-family='serif' font-size='60' font-style='italic' fill='%23C9A84C' text-anchor='middle'>V</text></svg>">
+</head>
+<body>
+
+<div id="header-wrapper"></div>
+<div id="contact-tab-wrapper"></div>
+<div id="scroll-top-wrapper"></div>
+
+<main id="main-content">
+
+  <!-- ═══════════════════════════════════════════════════
+       PAGE HERO
+  ═══════════════════════════════════════════════════ -->
+  <section class="meetings-hero" aria-label="Meetings and Conferences hero">
+    <div class="meetings-hero__content">
+      <p class="meetings-hero__eyebrow">Veranda Hotels & Resorts</p>
+      <h1 class="meetings-hero__title">Meetings &<br>Conferences</h1>
+      <p class="meetings-hero__sub">Where every gathering becomes an occasion</p>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════
+       INTRO + ENQUIRY FORM
+  ═══════════════════════════════════════════════════ -->
+  <section class="meetings-intro section-pad" id="meetings-intro" aria-labelledby="meetings-heading">
+    <div class="container">
+      <div class="notched-badge-wrap">
+        <div class="notched-badge">
+          <span class="notched-badge__text" id="meetings-heading">Meetings And Conferences</span>
+        </div>
+      </div>
+
+      <div class="two-col" style="align-items:flex-start;gap:4rem;">
+
+        <!-- LEFT: Descriptive copy -->
+        <div class="two-col__content reveal" style="gap:1.5rem;">
+          <p class="two-col__eyebrow">Corporate · Incentive · Weddings · Banquets</p>
+          <h2 class="two-col__heading" style="font-size:clamp(1.3rem,2vw,1.8rem);">
+            The Art of the<br>Perfect Gathering
+          </h2>
+          <p class="two-col__text">
+            Veranda's meeting and conference facilities are designed for the full range of corporate occasions — from intimate board retreats to large-scale conferences, product launches, and leadership summits. Each of our twelve properties maintains dedicated MICE infrastructure, with flexible layouts adaptable to theatre, classroom, U-shape, boardroom and banquet configurations.
+          </p>
+          <p class="two-col__text">
+            Beyond the boardroom, Veranda properties offer an exceptional secondary canvas for weddings, anniversaries, and private banquets. Our event coordinators work closely with clients from initial brief through to post-event review — coordinating catering, AV, décor, accommodation blocks, and cultural programming as a single integrated package.
+          </p>
+
+          <!-- Venue Grid (visual showcase) -->
+          <div class="venues-grid reveal">
+            <!-- Tile 1: Large, main boardroom -->
+            <div class="venue-tile">
+              <img class="venue-tile-bg" src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" style="width:100%;height:100%;object-fit:cover;">
+              <div class="venue-tile__label">Grand Ballroom · Bhubaneswar</div>
+            </div>
+            <!-- Tile 2 -->
+            <div class="venue-tile">
+              <img class="venue-tile-bg" src="https://images.unsplash.com/photo-1522798514-97ceb8c4f1c8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" style="width:100%;height:100%;object-fit:cover;">
+              <div class="venue-tile__label">Garden Pavilion</div>
+            </div>
+            <!-- Tile 3 -->
+            <div class="venue-tile">
+              <img class="venue-tile-bg" src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" style="width:100%;height:100%;object-fit:cover;">
+              <div class="venue-tile__label">Executive Suite</div>
+            </div>
+            <!-- Tile 4 -->
+            <div class="venue-tile">
+              <img class="venue-tile-bg" src="https://images.unsplash.com/photo-1551818255-e6e10975bc17?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" style="width:100%;height:100%;object-fit:cover;">
+              <div class="venue-tile__label">Rooftop Terrace</div>
+            </div>
+            <!-- Tile 5 -->
+            <div class="venue-tile">
+              <img class="venue-tile-bg" src="https://images.unsplash.com/photo-1560448205-4d9b3e6bb6db?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" style="width:100%;height:100%;object-fit:cover;">
+              <div class="venue-tile__label">Riverside Deck · Goa</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: Enquiry Form -->
+        <div class="reveal" style="animation-delay:0.15s;flex:1;min-width:0;">
+          <div class="form-card">
+            <p class="form-card__title">Enquire Now</p>
+
+            <!-- Success state -->
+            <div class="form-success" id="form-success">
+              <div class="form-success__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+              </div>
+              <h3 style="font-family:var(--font-heading);font-size:1rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--clr-teal);">Enquiry Received</h3>
+              <p style="font-size:0.875rem;color:var(--clr-body);text-align:center;line-height:1.7;">
+                Thank you for reaching out. Our events team will contact you within 24 hours to discuss your requirements.
+              </p>
+            </div>
+
+            <!-- Form -->
+            <form class="meetings-form" id="enquiry-form" novalidate>
+
+              <!-- Name -->
+              <div class="form-group">
+                <label for="f-name">Name</label>
+                <input type="text" id="f-name" name="name" placeholder="Your full name" required autocomplete="name">
+              </div>
+
+              <!-- Mobile + Email -->
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="f-mobile">Mobile</label>
+                  <div class="dial-code-row">
+                    <select class="dial-select" id="f-dialcode" aria-label="Country dial code">
+                      <option value="+91">🇮🇳 +91</option>
+                      <option value="+1">🇺🇸 +1</option>
+                      <option value="+44">🇬🇧 +44</option>
+                      <option value="+971">🇦🇪 +971</option>
+                      <option value="+65">🇸🇬 +65</option>
+                    </select>
+                    <input type="tel" id="f-mobile" name="mobile" placeholder="Mobile number" required autocomplete="tel">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="f-email">Email</label>
+                  <input type="email" id="f-email" name="email" placeholder="your@email.com" required autocomplete="email">
+                </div>
+              </div>
+
+              <!-- Venue + Date -->
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="f-venue">Venue</label>
+                  <select id="f-venue" name="venue">
+                    <option value="">Select property</option>
+                    <option value="bhubaneswar">Veranda Lagoon, Bhubaneswar</option>
+                    <option value="raipur">Veranda Lake Resort, Raipur</option>
+                    <option value="goa">Veranda on Sea, Goa</option>
+                    <option value="jungpana">Veranda Manor, Jungpana</option>
+                    <option value="vizag">Veranda Palm Beach, Vizag</option>
+                    <option value="shimla">Veranda Himalayan Spa, Shimla</option>
+                    <option value="coorg">Veranda Tea Resort, Coorg</option>
+                    <option value="jaipur">Veranda Oasis, Jaipur</option>
+                    <option value="udaipur">Veranda Heritage, Udaipur</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="f-date">Event Date</label>
+                  <input type="date" id="f-date" name="date">
+                </div>
+              </div>
+
+              <!-- Guests + Event Type -->
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="f-guests">Expected Guests</label>
+                  <input type="number" id="f-guests" name="guests" placeholder="e.g. 150" min="1" max="5000">
+                </div>
+                <div class="form-group">
+                  <label for="f-type">Event Type</label>
+                  <select id="f-type" name="type">
+                    <option value="">Select type</option>
+                    <option>Corporate Conference</option>
+                    <option>Board Meeting</option>
+                    <option>Product Launch</option>
+                    <option>Wedding</option>
+                    <option>Private Banquet</option>
+                    <option>Team Offsite</option>
+                    <option>Other</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Information / message -->
+              <div class="form-group">
+                <label for="f-info">Additional Information</label>
+                <textarea id="f-info" name="info" rows="3" placeholder="Tell us about your event requirements, special requests, or any questions..."></textarea>
+              </div>
+
+              <button type="submit" class="btn-primary" id="enquiry-submit" style="width:100%;justify-content:center;margin-top:0.5rem;">
+                Enquire Now <span class="chevron">›</span>
+              </button>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════
+       VENUE SPECS — ICON GRID
+  ═══════════════════════════════════════════════════ -->
+  <section class="section-specs section-pad" id="specs" aria-labelledby="specs-heading">
+    <div class="container">
+      <h2 class="text-h2 clr-logo" style="text-align:center;margin-bottom:0.5rem;" id="specs-heading">Venue Capabilities</h2>
+      <div style="width:50px;height:2px;background:var(--clr-accent);margin:0 auto 2.5rem;"></div>
+
+      <div class="icon-grid">
+
+        <!-- 1: Capacity -->
+        <div class="icon-grid__item reveal">
+          <div class="icon-grid__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+              <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 00-3-3.87"/>
+              <path d="M16 3.13a4 4 0 010 7.75"/>
+            </svg>
+          </div>
+          <div>
+            <div class="icon-grid__label">Guest Capacity</div>
+            <div class="icon-grid__value">20 – 5,000 Guests</div>
+          </div>
+        </div>
+
+        <!-- 2: Floor Area -->
+        <div class="icon-grid__item reveal" style="animation-delay:0.05s;">
+          <div class="icon-grid__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+              <rect x="3" y="3" width="18" height="18" rx="2"/>
+              <path d="M3 9h18M9 21V9"/>
+            </svg>
+          </div>
+          <div>
+            <div class="icon-grid__label">Floor Area</div>
+            <div class="icon-grid__value">56 – 2,044 Sq M</div>
+          </div>
+        </div>
+
+        <!-- 3: Ceiling Height -->
+        <div class="icon-grid__item reveal" style="animation-delay:0.1s;">
+          <div class="icon-grid__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+              <path d="M3 3h18M3 21h18M12 3v18M8 8l4-4 4 4M8 16l4 4 4-4"/>
+            </svg>
+          </div>
+          <div>
+            <div class="icon-grid__label">Ceiling Height</div>
+            <div class="icon-grid__value">4.2 – 9.8 Metres</div>
+          </div>
+        </div>
+
+        <!-- 4: Large Screens -->
+        <div class="icon-grid__item reveal" style="animation-delay:0.15s;">
+          <div class="icon-grid__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+              <rect x="2" y="3" width="20" height="14" rx="2"/>
+              <path d="M8 21h8M12 17v4"/>
+            </svg>
+          </div>
+          <div>
+            <div class="icon-grid__label">Display Technology</div>
+            <div class="icon-grid__value">LED Walls &amp; 4K Projection</div>
+          </div>
+        </div>
+
+        <!-- 5: High-Speed Wi-Fi -->
+        <div class="icon-grid__item reveal" style="animation-delay:0.2s;">
+          <div class="icon-grid__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+              <path d="M5 12.55a11 11 0 0114.08 0"/>
+              <path d="M1.42 9a16 16 0 0121.16 0"/>
+              <path d="M8.53 16.11a6 6 0 016.95 0"/>
+              <circle cx="12" cy="20" r="1" fill="currentColor" stroke="none"/>
+            </svg>
+          </div>
+          <div>
+            <div class="icon-grid__label">Connectivity</div>
+            <div class="icon-grid__value">Dedicated 1 Gbps Fibre</div>
+          </div>
+        </div>
+
+        <!-- 6: Remote Attendees -->
+        <div class="icon-grid__item reveal" style="animation-delay:0.25s;">
+          <div class="icon-grid__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+              <path d="M15 10l4.553-2.069A1 1 0 0121 8.867v6.266a1 1 0 01-1.447.902L15 14"/>
+              <rect x="1" y="8" width="14" height="8" rx="2"/>
+            </svg>
+          </div>
+          <div>
+            <div class="icon-grid__label">Hybrid Meetings</div>
+            <div class="icon-grid__value">Remote Attendee Ready</div>
+          </div>
+        </div>
+
+        <!-- 7: On-site Printing -->
+        <div class="icon-grid__item reveal" style="animation-delay:0.3s;">
+          <div class="icon-grid__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+              <polyline points="6 9 6 2 18 2 18 9"/>
+              <path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/>
+              <rect x="6" y="14" width="12" height="8"/>
+            </svg>
+          </div>
+          <div>
+            <div class="icon-grid__label">Business Centre</div>
+            <div class="icon-grid__value">On-Floor Print &amp; Copy</div>
+          </div>
+        </div>
+
+        <!-- 8: Catering -->
+        <div class="icon-grid__item reveal" style="animation-delay:0.35s;">
+          <div class="icon-grid__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+              <path d="M18 8h1a4 4 0 010 8h-1"/>
+              <path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/>
+              <line x1="6" y1="1" x2="6" y2="4"/>
+              <line x1="10" y1="1" x2="10" y2="4"/>
+              <line x1="14" y1="1" x2="14" y2="4"/>
+            </svg>
+          </div>
+          <div>
+            <div class="icon-grid__label">In-House Catering</div>
+            <div class="icon-grid__value">All-Day Refreshments</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════
+       FULL-BLEED BANNER
+  ═══════════════════════════════════════════════════ -->
+  <section class="meetings-banner" id="meetings-banner" aria-label="Elevate your next work meeting">
+    <div class="meetings-banner__bg"></div>
+    <div class="meetings-banner__overlay"></div>
+
+    <div class="meetings-banner__content">
+      <p class="meetings-banner__kicker">Veranda Hotels &amp; Resorts · MICE</p>
+      <h2 class="meetings-banner__headline">
+        <span class="big">ELEVATE</span>
+        <span class="small">Your Next Work Meeting</span>
+      </h2>
+      <p class="meetings-banner__sub">
+        Every Veranda conference space comes with dedicated event management, bespoke menu planning, and the world-class service that has defined the group for over three decades.
+      </p>
+      <a href="#meetings-intro" class="btn-primary">
+        Enquire Now <span class="chevron">›</span>
+      </a>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════
+       RELATED LINKS
+  ═══════════════════════════════════════════════════ -->
+  <section style="background:var(--clr-offwhite);padding:var(--space-xl) 0;" aria-labelledby="related-heading">
+    <div class="container">
+      <h2 class="text-h3 clr-logo" style="text-align:center;margin-bottom:2rem;" id="related-heading">Also at Veranda</h2>
+      <div class="grid-3">
+        <a href="index.html#about" style="display:flex;flex-direction:column;align-items:center;gap:0.75rem;text-decoration:none;padding:1.5rem;border:1px solid #e8e8e5;border-radius:8px;transition:all 0.3s ease;" class="reveal">
+          <div style="width:48px;height:48px;border-radius:50%;border:1.5px solid var(--clr-teal);display:flex;align-items:center;justify-content:center;color:var(--clr-teal);">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </div>
+          <span style="font-family:var(--font-heading);font-size:0.72rem;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--clr-dark-text);">About the Brand</span>
+          <span style="font-size:0.8rem;color:var(--clr-body);text-align:center;">Discover our story, values and heritage</span>
+        </a>
+        <a href="index.html#rooms" style="display:flex;flex-direction:column;align-items:center;gap:0.75rem;text-decoration:none;padding:1.5rem;border:1px solid #e8e8e5;border-radius:8px;transition:all 0.3s ease;" class="reveal" style="animation-delay:0.1s;">
+          <div style="width:48px;height:48px;border-radius:50%;border:1.5px solid var(--clr-teal);display:flex;align-items:center;justify-content:center;color:var(--clr-teal);">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 4v16"/><path d="M2 8h18a2 2 0 012 2v10"/><path d="M2 17h20"/><path d="M6 8v9"/></svg>
+          </div>
+          <span style="font-family:var(--font-heading);font-size:0.72rem;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--clr-dark-text);">Suites &amp; Rooms</span>
+          <span style="font-size:0.8rem;color:var(--clr-body);text-align:center;">All 9 Veranda properties across India</span>
+        </a>
+        <a href="booking.html" style="display:flex;flex-direction:column;align-items:center;gap:0.75rem;text-decoration:none;padding:1.5rem;border:1px solid #e8e8e5;border-radius:8px;transition:all 0.3s ease;" class="reveal" style="animation-delay:0.2s;">
+          <div style="width:48px;height:48px;border-radius:50%;border:1.5px solid var(--clr-teal);display:flex;align-items:center;justify-content:center;color:var(--clr-teal);">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
+          <span style="font-family:var(--font-heading);font-size:0.72rem;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--clr-dark-text);">Book Your Stay</span>
+          <span style="font-size:0.8rem;color:var(--clr-body);text-align:center;">Check availability and make a reservation</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<div id="footer-wrapper"></div>
+
+<script src="js/components.js"></script>
+<script src="js/carousel.js"></script>
+<script>
+  renderComponents('meetings');
+
+  // Hover effect on related links
+  document.querySelectorAll('[href]').forEach(el => {
+    if (el.closest('.grid-3')) {
+      el.addEventListener('mouseenter', () => {
+        el.style.boxShadow = '0 4px 20px rgba(0,0,0,0.1)';
+        el.style.transform = 'translateY(-3px)';
+      });
+      el.addEventListener('mouseleave', () => {
+        el.style.boxShadow = '';
+        el.style.transform = '';
+      });
+    }
+  });
+
+  // Form submission
+  const form = document.getElementById('enquiry-form');
+  const success = document.getElementById('form-success');
+  const submitBtn = document.getElementById('enquiry-submit');
+
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    // Basic validation
+    const name   = document.getElementById('f-name')?.value.trim();
+    const mobile = document.getElementById('f-mobile')?.value.trim();
+    const email  = document.getElementById('f-email')?.value.trim();
+
+    if (!name || !mobile || !email) {
+      // Shake invalid fields
+      [document.getElementById('f-name'), document.getElementById('f-mobile'), document.getElementById('f-email')].forEach(el => {
+        if (el && !el.value.trim()) {
+          el.style.borderBottomColor = '#c0392b';
+          el.style.animation = 'none';
+          setTimeout(() => {
+            el.style.borderBottomColor = '';
+          }, 2000);
+        }
+      });
+      return;
+    }
+
+    // Simulate submission
+    submitBtn.textContent = 'Sending…';
+    submitBtn.disabled = true;
+
+    setTimeout(() => {
+      form.style.display = 'none';
+      success.classList.add('show');
+    }, 1200);
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,1976 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Select Your Room — Veranda Hotels & Resorts</title>
+  <meta name="description" content="Browse and book luxury rooms at Veranda Hotels & Resorts. Choose from Deluxe Rooms, Heritage Suites, and Presidential Villas.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/global.css">
+  <style>
+    /* ════════════════════════════════════════════════
+       PROPERTY PAGE — ROOM SELECTION & BOOKING
+    ════════════════════════════════════════════════ */
+
+    body { background: #F7F3EC; }
+
+    /* ─── Property Hero ──────────────────────────────── */
+    .prop-hero {
+      height: 380px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+    }
+
+    .prop-hero__bg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #1C1008 0%, #5C3320 50%, #8B4513 100%);
+      transition: background 0s;
+    }
+
+    .prop-hero__bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.6;
+    }
+
+    .prop-hero__overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(28,16,8,0.9) 0%, rgba(28,16,8,0.4) 50%, transparent 100%);
+    }
+
+    .prop-hero__content {
+      position: relative;
+      z-index: 1;
+      padding: 2.5rem;
+      width: 100%;
+    }
+
+    .prop-hero__breadcrumb {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .prop-hero__breadcrumb a {
+      color: rgba(255,255,255,0.6);
+      transition: color 0.2s;
+    }
+
+    .prop-hero__breadcrumb a:hover { color: #C9A84C; }
+
+    .prop-hero__name {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 3.2rem);
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: white;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .prop-hero__location {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.15rem;
+      color: rgba(255,255,255,0.75);
+      font-weight: 300;
+      margin-bottom: 0.75rem;
+    }
+
+    .prop-hero__stars {
+      display: flex;
+      gap: 3px;
+      margin-bottom: 1rem;
+    }
+
+    .prop-hero__stars svg {
+      width: 16px;
+      height: 16px;
+      color: #C9A84C;
+      fill: #C9A84C;
+    }
+
+    .prop-hero__tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .prop-hero__tag {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.62rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: white;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(255,255,255,0.25);
+      padding: 4px 12px;
+      border-radius: 20px;
+    }
+
+    /* ─── Stay Summary Bar ───────────────────────────── */
+    .stay-bar {
+      background: #1C1008;
+      padding: 14px 2.5rem;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.3);
+    }
+
+    .stay-bar__item {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .stay-bar__label {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.55rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+    }
+
+    .stay-bar__value {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: white;
+      letter-spacing: 0.03em;
+    }
+
+    .stay-bar__divider {
+      width: 1px;
+      height: 32px;
+      background: rgba(255,255,255,0.15);
+    }
+
+    .stay-bar__change {
+      margin-left: auto;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #C9A84C;
+      background: none;
+      border: 1px solid #C9A84C;
+      padding: 6px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .stay-bar__change:hover {
+      background: #C9A84C;
+      color: #1C1008;
+    }
+
+    /* ─── Page Layout ────────────────────────────────── */
+    .page-layout {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 2.5rem;
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    /* ─── Section Title ──────────────────────────────── */
+    .rooms-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #7A4F3A;
+      margin-bottom: 0.5rem;
+    }
+
+    .rooms-count {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.5rem;
+      color: #6B5B52;
+      margin-bottom: 1.75rem;
+    }
+
+    /* ─── Room Card ──────────────────────────────────── */
+    .room-card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 1.25rem;
+      box-shadow: 0 2px 12px rgba(28,16,8,0.08);
+      transition: box-shadow 0.3s, transform 0.3s;
+      border: 1px solid rgba(28,16,8,0.06);
+    }
+
+    .room-card:hover {
+      box-shadow: 0 8px 32px rgba(28,16,8,0.14);
+      transform: translateY(-2px);
+    }
+
+    .room-card__inner {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+    }
+
+    .room-card__img {
+      width: 300px;
+      height: 220px;
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .room-card__img-bg {
+      width: 100%;
+      height: 100%;
+      transition: transform 0.6s ease;
+    }
+
+    .room-card:hover .room-card__img-bg {
+      transform: scale(1.06);
+    }
+
+    .room-card__badge {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.58rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 20px;
+    }
+
+    .badge--popular {
+      background: #C9A84C;
+      color: #1C1008;
+    }
+
+    .badge--value {
+      background: #5C3320;
+      color: white;
+    }
+
+    .badge--luxury {
+      background: #1C1008;
+      color: #C9A84C;
+    }
+
+    .room-card__body {
+      padding: 1.5rem 1.75rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 220px;
+    }
+
+    .room-card__top { flex: 1; }
+
+    .room-card__type {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #8B4513;
+      margin-bottom: 4px;
+    }
+
+    .room-card__name {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #1A1108;
+      letter-spacing: 0.03em;
+      margin-bottom: 0.6rem;
+    }
+
+    .room-card__meta {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .room-card__meta-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      color: #6B5B52;
+    }
+
+    .room-card__meta-item svg {
+      width: 14px;
+      height: 14px;
+      color: #8B4513;
+      flex-shrink: 0;
+    }
+
+    .room-card__amenities {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 0.75rem;
+    }
+
+    .room-chip {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.65rem;
+      color: #7A4F3A;
+      background: #F0EBE0;
+      padding: 3px 9px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    .room-card__divider {
+      border: none;
+      border-top: 1px solid #F0EBE0;
+      margin: 0.75rem 0;
+    }
+
+    .room-card__bottom {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .room-card__price-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.62rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #6B5B52;
+      margin-bottom: 2px;
+    }
+
+    .room-card__price {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #1A1108;
+      line-height: 1;
+    }
+
+    .room-card__price-night {
+      font-size: 0.7rem;
+      color: #6B5B52;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .room-card__total {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      color: #8B4513;
+      margin-top: 2px;
+    }
+
+    .btn-select {
+      background: #5C3320;
+      color: white;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.2s, transform 0.2s;
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .btn-select::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: #C9A84C;
+    }
+
+    .btn-select:hover {
+      background: #6b3d28;
+      transform: translateY(-2px);
+    }
+
+    .btn-select:active {
+      transform: translateY(0);
+    }
+
+    /* ─── Sticky Booking Summary (Right Column) ──────── */
+    .booking-summary {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(28,16,8,0.1);
+      overflow: hidden;
+      position: sticky;
+      top: 72px;
+      border: 1px solid rgba(28,16,8,0.06);
+    }
+
+    .booking-summary__header {
+      background: #1C1008;
+      padding: 1.25rem 1.5rem;
+    }
+
+    .booking-summary__header-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 4px;
+    }
+
+    .booking-summary__property {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: white;
+      letter-spacing: 0.03em;
+    }
+
+    .booking-summary__body {
+      padding: 1.5rem;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid #F0EBE0;
+    }
+
+    .summary-row:last-of-type { border-bottom: none; }
+
+    .summary-row__label {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.78rem;
+      color: #6B5B52;
+    }
+
+    .summary-row__value {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #1A1108;
+      text-align: right;
+    }
+
+    .booking-summary__selected {
+      background: #F0EBE0;
+      border-radius: 8px;
+      padding: 1rem;
+      margin: 1rem 0;
+      display: none;
+    }
+
+    .booking-summary__selected.show { display: block; }
+
+    .booking-summary__selected-name {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #1A1108;
+      margin-bottom: 4px;
+    }
+
+    .booking-summary__selected-price {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #8B4513;
+    }
+
+    .booking-summary__total {
+      border-top: 2px solid #1C1008;
+      padding-top: 1rem;
+      margin-top: 0.5rem;
+    }
+
+    .booking-summary__total-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .booking-summary__total-label {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #6B5B52;
+    }
+
+    .booking-summary__total-value {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #1A1108;
+    }
+
+    .booking-summary__taxes {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.68rem;
+      color: #6B5B52;
+      text-align: right;
+      margin-top: 2px;
+    }
+
+    .btn-proceed {
+      width: 100%;
+      background: #5C3320;
+      color: white;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 15px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 1rem;
+      transition: background 0.2s;
+      position: relative;
+    }
+
+    .btn-proceed::after {
+      content: '';
+      position: absolute;
+      bottom: -3px;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: #C9A84C;
+      border-radius: 0 0 3px 3px;
+    }
+
+    .btn-proceed:hover { background: #6b3d28; }
+    .btn-proceed:disabled { background: #C4B5A8; cursor: not-allowed; }
+    .btn-proceed:disabled::after { background: #C4B5A8; }
+
+    .summary-placeholder {
+      text-align: center;
+      padding: 1.5rem 0;
+      color: #C4B5A8;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1rem;
+    }
+
+    .summary-placeholder svg {
+      width: 40px;
+      height: 40px;
+      margin: 0 auto 0.75rem;
+      display: block;
+      color: #D4C5B0;
+    }
+
+    /* ─── Booking Slide Panel ────────────────────────── */
+    .slide-panel-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(28,16,8,0.5);
+      z-index: 800;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+
+    .slide-panel-overlay.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .slide-panel {
+      position: fixed;
+      right: -560px;
+      top: 0;
+      width: 560px;
+      max-width: 100vw;
+      height: 100vh;
+      background: white;
+      z-index: 900;
+      overflow-y: auto;
+      transition: right 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+      display: flex;
+      flex-direction: column;
+      box-shadow: -4px 0 40px rgba(0,0,0,0.25);
+    }
+
+    .slide-panel.open {
+      right: 0;
+    }
+
+    .slide-panel__header {
+      background: #1C1008;
+      padding: 1.5rem 2rem;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+
+    .slide-panel__close {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.3);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+      transition: background 0.2s;
+    }
+
+    .slide-panel__close:hover { background: rgba(255,255,255,0.1); }
+
+    .slide-panel__title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 4px;
+    }
+
+    .slide-panel__room-name {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: white;
+      letter-spacing: 0.03em;
+    }
+
+    .slide-panel__body {
+      padding: 2rem;
+      flex: 1;
+    }
+
+    /* Progress Steps */
+    .booking-steps {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      margin-bottom: 2rem;
+    }
+
+    .step {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex: 1;
+    }
+
+    .step__num {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 2px solid #D4C5B0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #D4C5B0;
+      flex-shrink: 0;
+      transition: all 0.3s;
+    }
+
+    .step.active .step__num {
+      background: #5C3320;
+      border-color: #5C3320;
+      color: white;
+    }
+
+    .step.done .step__num {
+      background: #C9A84C;
+      border-color: #C9A84C;
+      color: #1C1008;
+    }
+
+    .step__label {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.62rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #D4C5B0;
+      transition: color 0.3s;
+    }
+
+    .step.active .step__label { color: #5C3320; }
+    .step.done .step__label { color: #C9A84C; }
+
+    .step-line {
+      flex: 1;
+      height: 1px;
+      background: #D4C5B0;
+      margin: 0 8px;
+    }
+
+    /* Selected Room Mini Card */
+    .selected-room-card {
+      background: #F0EBE0;
+      border-radius: 10px;
+      padding: 1.25rem;
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: 1rem;
+      margin-bottom: 1.75rem;
+      border: 1px solid rgba(139,69,19,0.1);
+    }
+
+    .selected-room-card__img {
+      width: 100px;
+      height: 80px;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .selected-room-card__info-label {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.55rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #8B4513;
+      margin-bottom: 2px;
+    }
+
+    .selected-room-card__name {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #1A1108;
+      margin-bottom: 4px;
+    }
+
+    .selected-room-card__price {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #8B4513;
+    }
+
+    /* Form Styling (Hairline inputs, matching brand) */
+    .booking-form { display: flex; flex-direction: column; gap: 0; }
+
+    .form-section-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #7A4F3A;
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid #F0EBE0;
+    }
+
+    .form-row-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .form-group-panel {
+      margin-bottom: 1.25rem;
+    }
+
+    .form-group-panel label {
+      display: block;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.58rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #6B5B52;
+      margin-bottom: 6px;
+    }
+
+    .form-group-panel input,
+    .form-group-panel select,
+    .form-group-panel textarea {
+      width: 100%;
+      background: none;
+      border: none;
+      border-bottom: 1.5px solid #D4C5B0;
+      padding: 8px 0;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.88rem;
+      color: #1A1108;
+      outline: none;
+      transition: border-color 0.2s;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+
+    .form-group-panel input:focus,
+    .form-group-panel select:focus,
+    .form-group-panel textarea:focus {
+      border-bottom-color: #8B4513;
+    }
+
+    /* Price Breakdown */
+    .price-breakdown {
+      background: #F7F3EC;
+      border-radius: 10px;
+      padding: 1.25rem;
+      margin: 1.5rem 0;
+    }
+
+    .price-breakdown__title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.62rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #6B5B52;
+      margin-bottom: 1rem;
+    }
+
+    .price-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 6px 0;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.82rem;
+      color: #6B5B52;
+    }
+
+    .price-row strong {
+      color: #1A1108;
+      font-family: 'Outfit', sans-serif;
+    }
+
+    .price-row--total {
+      border-top: 1.5px solid #D4C5B0;
+      margin-top: 6px;
+      padding-top: 12px;
+      font-size: 0.9rem;
+    }
+
+    .price-row--total strong {
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+
+    /* Payment Method */
+    .payment-methods {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-bottom: 1.5rem;
+    }
+
+    .pay-option {
+      border: 1.5px solid #D4C5B0;
+      border-radius: 8px;
+      padding: 10px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .pay-option:hover {
+      border-color: #8B4513;
+      background: #F7F3EC;
+    }
+
+    .pay-option.selected {
+      border-color: #5C3320;
+      background: #F0EBE0;
+    }
+
+    .pay-option svg {
+      width: 22px;
+      height: 22px;
+      color: #7A4F3A;
+    }
+
+    .pay-option__label {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.58rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #6B5B52;
+    }
+
+    /* Confirm Button */
+    .btn-confirm {
+      width: 100%;
+      background: linear-gradient(135deg, #5C3320, #8B4513);
+      color: white;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-confirm::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(201,168,76,0.2), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .btn-confirm:hover::before { opacity: 1; }
+    .btn-confirm:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(92,51,32,0.4); }
+
+    /* ─── Success Screen ──────────────────────────────── */
+    .success-screen {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 3rem 2rem;
+      min-height: 100%;
+    }
+
+    .success-screen.show {
+      display: flex;
+    }
+
+    .success-icon {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #5C3320, #8B4513);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      animation: pop 0.5s cubic-bezier(0.26, 1.48, 0.46, 0.97) both;
+    }
+
+    @keyframes pop {
+      from { transform: scale(0); opacity: 0; }
+      to   { transform: scale(1); opacity: 1; }
+    }
+
+    .success-icon svg {
+      width: 40px;
+      height: 40px;
+      color: white;
+    }
+
+    .success-confetti {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      animation: fadeInUp 0.6s ease 0.2s both;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .success-heading {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #1A1108;
+      margin-bottom: 0.75rem;
+      animation: fadeInUp 0.6s ease 0.3s both;
+    }
+
+    .success-sub {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.15rem;
+      color: #6B5B52;
+      margin-bottom: 2rem;
+      line-height: 1.5;
+      animation: fadeInUp 0.6s ease 0.4s both;
+    }
+
+    .booking-ref {
+      background: #F0EBE0;
+      border-radius: 10px;
+      padding: 1.25rem 2rem;
+      margin-bottom: 2rem;
+      animation: fadeInUp 0.6s ease 0.5s both;
+      width: 100%;
+    }
+
+    .booking-ref__label {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #6B5B52;
+      margin-bottom: 6px;
+    }
+
+    .booking-ref__number {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #8B4513;
+      letter-spacing: 0.12em;
+    }
+
+    .success-details {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      width: 100%;
+      margin-bottom: 2rem;
+      animation: fadeInUp 0.6s ease 0.6s both;
+    }
+
+    .success-detail-item {
+      background: white;
+      border: 1px solid #F0EBE0;
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      text-align: left;
+    }
+
+    .success-detail-item__label {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.55rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #6B5B52;
+      margin-bottom: 3px;
+    }
+
+    .success-detail-item__value {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #1A1108;
+    }
+
+    .btn-done {
+      background: #1C1008;
+      color: white;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 14px 32px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      animation: fadeInUp 0.6s ease 0.7s both;
+      transition: background 0.2s;
+    }
+
+    .btn-done:hover { background: #5C3320; }
+
+    /* ─── Amenities Section ───────────────────────────── */
+    .prop-amenities {
+      background: white;
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 2px 12px rgba(28,16,8,0.06);
+      margin-top: 1.5rem;
+      border: 1px solid rgba(28,16,8,0.06);
+    }
+
+    .prop-amenities__title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #7A4F3A;
+      margin-bottom: 1rem;
+    }
+
+    .amenities-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.75rem;
+    }
+
+    .amenity-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      padding: 12px 6px;
+      background: #F7F3EC;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .amenity-item svg {
+      width: 20px;
+      height: 20px;
+      color: #8B4513;
+    }
+
+    .amenity-item__label {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.64rem;
+      color: #6B5B52;
+      line-height: 1.3;
+    }
+
+    /* ─── Responsive ──────────────────────────────────── */
+    @media (max-width: 1100px) {
+      .page-layout {
+        grid-template-columns: 1fr;
+      }
+      .booking-summary {
+        position: static;
+        order: -1;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .room-card__inner {
+        grid-template-columns: 1fr;
+      }
+      .room-card__img { width: 100%; height: 200px; }
+      .stay-bar { padding: 12px 1rem; gap: 1rem; }
+      .prop-hero__content { padding: 1.5rem; }
+      .page-layout { padding: 1.5rem; }
+      .slide-panel { width: 100vw; right: -100vw; }
+      .amenities-grid { grid-template-columns: repeat(2, 1fr); }
+      .form-row-2 { grid-template-columns: 1fr; }
+    }
+  </style>
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%235C3320'/><text x='50' y='70' font-family='serif' font-size='60' font-style='italic' fill='%23C9A84C' text-anchor='middle'>V</text></svg>">
+</head>
+<body>
+
+<!-- ─── Slide Panel Overlay ────────────────────────── -->
+<div class="slide-panel-overlay" id="panel-overlay"></div>
+
+<!-- ─── Booking Slide Panel ────────────────────────── -->
+<div class="slide-panel" id="booking-panel">
+  <div class="slide-panel__header">
+    <div>
+      <div class="slide-panel__title">Complete Your Booking</div>
+      <div class="slide-panel__room-name" id="panel-room-name">Room Name</div>
+    </div>
+    <button class="slide-panel__close" id="panel-close" aria-label="Close panel">&times;</button>
+  </div>
+
+  <div class="slide-panel__body" id="panel-body">
+
+    <!-- Progress Steps -->
+    <div class="booking-steps">
+      <div class="step active" id="step-1">
+        <div class="step__num">1</div>
+        <span class="step__label">Details</span>
+      </div>
+      <div class="step-line"></div>
+      <div class="step" id="step-2">
+        <div class="step__num">2</div>
+        <span class="step__label">Payment</span>
+      </div>
+      <div class="step-line"></div>
+      <div class="step" id="step-3">
+        <div class="step__num">3</div>
+        <span class="step__label">Confirm</span>
+      </div>
+    </div>
+
+    <!-- Selected Room Mini Card -->
+    <div class="selected-room-card">
+      <div class="selected-room-card__img">
+        <div id="panel-room-img" style="width:100%;height:100%;border-radius:6px;"></div>
+      </div>
+      <div>
+        <div class="selected-room-card__info-label" id="panel-prop-name">Property</div>
+        <div class="selected-room-card__name" id="panel-room-name-2">Room</div>
+        <div class="selected-room-card__price" id="panel-room-price">₹0 / night</div>
+      </div>
+    </div>
+
+    <!-- STEP 1: Guest Details -->
+    <div id="panel-step-1">
+      <p class="form-section-title">Guest Information</p>
+      <form class="booking-form" id="booking-form" novalidate>
+        <div class="form-row-2">
+          <div class="form-group-panel">
+            <label for="bf-firstname">First Name *</label>
+            <input type="text" id="bf-firstname" placeholder="First name" required>
+          </div>
+          <div class="form-group-panel">
+            <label for="bf-lastname">Last Name *</label>
+            <input type="text" id="bf-lastname" placeholder="Last name" required>
+          </div>
+        </div>
+        <div class="form-group-panel">
+          <label for="bf-email">Email Address *</label>
+          <input type="email" id="bf-email" placeholder="your@email.com" required>
+        </div>
+        <div class="form-row-2">
+          <div class="form-group-panel">
+            <label for="bf-phone">Mobile *</label>
+            <input type="tel" id="bf-phone" placeholder="+91 XXXXX XXXXX" required>
+          </div>
+          <div class="form-group-panel">
+            <label for="bf-nationality">Nationality</label>
+            <select id="bf-nationality">
+              <option value="IN">Indian</option>
+              <option value="US">American</option>
+              <option value="UK">British</option>
+              <option value="AE">UAE</option>
+              <option value="SG">Singaporean</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group-panel">
+          <label for="bf-requests">Special Requests</label>
+          <input type="text" id="bf-requests" placeholder="e.g. high floor, early check-in, anniversary">
+        </div>
+      </form>
+
+      <!-- Price Breakdown -->
+      <div class="price-breakdown">
+        <div class="price-breakdown__title">Price Breakdown</div>
+        <div class="price-row">
+          <span id="br-nights-label">1 night × ₹0</span>
+          <strong id="br-subtotal">₹0</strong>
+        </div>
+        <div class="price-row">
+          <span>Taxes &amp; Fees (18% GST)</span>
+          <strong id="br-tax">₹0</strong>
+        </div>
+        <div class="price-row">
+          <span>Resort Fee</span>
+          <strong>₹500</strong>
+        </div>
+        <div class="price-row price-row--total">
+          <span style="font-weight:600;color:#1A1108;">Total</span>
+          <strong id="br-total">₹0</strong>
+        </div>
+      </div>
+
+      <button class="btn-confirm" onclick="goToPayment()">
+        Continue to Payment →
+      </button>
+    </div>
+
+    <!-- STEP 2: Payment -->
+    <div id="panel-step-2" style="display:none;">
+      <p class="form-section-title">Payment Method</p>
+
+      <div class="payment-methods">
+        <div class="pay-option selected" id="pay-card" onclick="selectPay('card')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <rect x="1" y="4" width="22" height="16" rx="2"/>
+            <line x1="1" y1="10" x2="23" y2="10"/>
+          </svg>
+          <span class="pay-option__label">Card</span>
+        </div>
+        <div class="pay-option" id="pay-upi" onclick="selectPay('upi')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+          </svg>
+          <span class="pay-option__label">UPI</span>
+        </div>
+        <div class="pay-option" id="pay-nb" onclick="selectPay('nb')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+            <polyline points="9 22 9 12 15 12 15 22"/>
+          </svg>
+          <span class="pay-option__label">Net Bank</span>
+        </div>
+      </div>
+
+      <!-- Card form (shown by default) -->
+      <div id="card-form">
+        <div class="form-group-panel">
+          <label>Card Number</label>
+          <input type="text" placeholder="1234 5678 9012 3456" maxlength="19" oninput="formatCard(this)">
+        </div>
+        <div class="form-row-2">
+          <div class="form-group-panel">
+            <label>Expiry Date</label>
+            <input type="text" placeholder="MM / YY" maxlength="7" oninput="formatExpiry(this)">
+          </div>
+          <div class="form-group-panel">
+            <label>CVV</label>
+            <input type="password" placeholder="•••" maxlength="3">
+          </div>
+        </div>
+        <div class="form-group-panel">
+          <label>Name on Card</label>
+          <input type="text" placeholder="As printed on card">
+        </div>
+      </div>
+
+      <!-- UPI form -->
+      <div id="upi-form" style="display:none;">
+        <div class="form-group-panel">
+          <label>UPI ID</label>
+          <input type="text" placeholder="yourname@upi">
+        </div>
+        <p style="font-size:0.75rem;color:#6B5B52;margin-top:0.5rem;">You'll receive a payment request on your UPI app.</p>
+      </div>
+
+      <!-- Net Banking -->
+      <div id="nb-form" style="display:none;">
+        <div class="form-group-panel">
+          <label>Select Bank</label>
+          <select>
+            <option>SBI</option>
+            <option>HDFC Bank</option>
+            <option>ICICI Bank</option>
+            <option>Axis Bank</option>
+            <option>Kotak Mahindra</option>
+            <option>Yes Bank</option>
+          </select>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:1rem;margin-top:1.5rem;">
+        <button style="flex:1;background:none;border:1.5px solid #D4C5B0;color:#6B5B52;font-family:'Outfit',sans-serif;font-size:0.7rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;padding:13px;border-radius:6px;cursor:pointer;" onclick="backToDetails()">
+          ← Back
+        </button>
+        <button class="btn-confirm" style="flex:2;" onclick="confirmBooking()">
+          Pay &amp; Confirm Booking →
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Success Screen (inside panel) -->
+  <div class="success-screen" id="success-screen">
+    <div class="success-confetti">🎉</div>
+    <div class="success-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+        <polyline points="20 6 9 17 4 12"/>
+      </svg>
+    </div>
+    <h2 class="success-heading">Booking Confirmed!</h2>
+    <p class="success-sub" id="success-sub">Your stay at Veranda has been confirmed.<br>A confirmation email is on its way.</p>
+
+    <div class="booking-ref">
+      <div class="booking-ref__label">Booking Reference</div>
+      <div class="booking-ref__number" id="success-ref">VHR-XXXXXX</div>
+    </div>
+
+    <div class="success-details" id="success-details">
+      <!-- Populated by JS -->
+    </div>
+
+    <button class="btn-done" onclick="window.location.href='index.html'">
+      Back to Home
+    </button>
+  </div>
+</div>
+
+<!-- ─── Main Content ────────────────────────────────── -->
+
+<!-- ─── Header Wrapper ────────────────────────────────── -->
+<div id="header-wrapper"></div>
+
+<!-- Property Hero -->
+<section class="prop-hero" id="prop-hero">
+  <div class="prop-hero__bg" id="hero-bg">
+    <!-- Background set by JS -->
+  </div>
+  <div class="prop-hero__overlay"></div>
+  <div class="prop-hero__content">
+    <div class="prop-hero__breadcrumb">
+      <a href="booking.html">All Properties</a>
+      <span>›</span>
+      <span id="hero-prop-name">Property Name</span>
+    </div>
+    <h1 class="prop-hero__name" id="hero-name">Loading…</h1>
+    <div class="prop-hero__location" id="hero-location"></div>
+    <div class="prop-hero__stars" id="hero-stars"></div>
+    <div class="prop-hero__tags" id="hero-tags"></div>
+  </div>
+</section>
+
+<!-- Stay Summary Bar -->
+<div class="stay-bar" id="stay-bar">
+  <div class="stay-bar__item">
+    <div class="stay-bar__label">Check In</div>
+    <div class="stay-bar__value" id="bar-checkin">—</div>
+  </div>
+  <div class="stay-bar__divider"></div>
+  <div class="stay-bar__item">
+    <div class="stay-bar__label">Check Out</div>
+    <div class="stay-bar__value" id="bar-checkout">—</div>
+  </div>
+  <div class="stay-bar__divider"></div>
+  <div class="stay-bar__item">
+    <div class="stay-bar__label">Duration</div>
+    <div class="stay-bar__value" id="bar-nights">— nights</div>
+  </div>
+  <div class="stay-bar__divider"></div>
+  <div class="stay-bar__item">
+    <div class="stay-bar__label">Guests</div>
+    <div class="stay-bar__value" id="bar-guests">—</div>
+  </div>
+  <button class="stay-bar__change" onclick="window.location.href='booking.html'">Change</button>
+</div>
+
+<!-- Page layout -->
+<div class="page-layout">
+
+  <!-- Left: Room List -->
+  <div>
+    <p class="rooms-title">Available for Your Dates</p>
+    <p class="rooms-count" id="rooms-count-text">4 room types available</p>
+
+    <div id="rooms-list">
+      <!-- Rooms injected by JS -->
+    </div>
+
+    <!-- Property Amenities -->
+    <div class="prop-amenities">
+      <div class="prop-amenities__title">Property Amenities</div>
+      <div class="amenities-grid" id="amenities-grid">
+        <!-- Injected by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Right: Sticky Summary -->
+  <div>
+    <div class="booking-summary">
+      <div class="booking-summary__header">
+        <div class="booking-summary__header-title">Your Selection</div>
+        <div class="booking-summary__property" id="summary-prop-name">No room selected</div>
+      </div>
+      <div class="booking-summary__body">
+        <div class="summary-placeholder" id="summary-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+            <polyline points="9 22 9 12 15 12 15 22"/>
+          </svg>
+          Choose a room to see your total
+        </div>
+
+        <div id="summary-detail" style="display:none;">
+          <div class="booking-summary__selected" id="summary-selected-card">
+            <div class="booking-summary__selected-name" id="summary-room-name">—</div>
+            <div class="booking-summary__selected-price" id="summary-room-price">—</div>
+          </div>
+
+          <div class="summary-row"><span class="summary-row__label">Check In</span><span class="summary-row__value" id="sum-ci">—</span></div>
+          <div class="summary-row"><span class="summary-row__label">Check Out</span><span class="summary-row__value" id="sum-co">—</span></div>
+          <div class="summary-row"><span class="summary-row__label">Nights</span><span class="summary-row__value" id="sum-nights">—</span></div>
+          <div class="summary-row"><span class="summary-row__label">Guests</span><span class="summary-row__value" id="sum-guests">—</span></div>
+
+          <div class="booking-summary__total">
+            <div class="booking-summary__total-row">
+              <span class="booking-summary__total-label">Total (incl. taxes)</span>
+              <div>
+                <div class="booking-summary__total-value" id="sum-total">₹0</div>
+                <div class="booking-summary__taxes">+₹500 resort fee</div>
+              </div>
+            </div>
+          </div>
+
+          <button class="btn-proceed" id="btn-proceed" onclick="openPanel()">
+            Proceed to Book →
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ─── JS ─────────────────────────────────────────────── -->
+<script>
+/* ═══════════════════════════════════════════════════
+   PROPERTY DATA
+═══════════════════════════════════════════════════ */
+const PROPERTIES = {
+  0: {
+    name: 'Veranda Lagoon',
+    city: 'Bhubaneswar', state: 'Odisha',
+    stars: 5,
+    img: 'https://images.unsplash.com/photo-1510798831971-661eb04b3739?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
+    tags: ['Lagoon View','Pool','Heritage'],
+    amenities: ['Pool','Spa','Free Wi-Fi','Restaurant','Bar','Room Service','Fitness Centre','Concierge','Valet','Airport Transfer','Conference Hall','Laundry'],
+    rooms: [
+      { id:'r1', type:'Classic', name:'Classic Lagoon Room', size:32, beds:'1 King', guests:2, price:12500, badge:'value', img:'https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80', amenities:['Lagoon View','Free Wi-Fi','Mini Bar','LCD TV'] },
+      { id:'r2', type:'Deluxe', name:'Deluxe Pool View Room', size:42, beds:'1 King or 2 Twin', guests:2, price:16500, badge:'popular', img:'https://images.unsplash.com/photo-1590490360182-c33d57733427?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80', amenities:['Pool View','Balcony','Free Wi-Fi','Premium Toiletries','Bathtub'] },
+      { id:'r3', type:'Suite', name:'Heritage Suite', size:68, beds:'1 King + Living Room', guests:3, price:26500, badge:'luxury', img:'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80', amenities:['Panoramic View','Butler Service','Jacuzzi','In-Suite Dining','Lounge Access'] },
+      { id:'r4', type:'Villa', name:'Presidential Villa', size:120, beds:'2 Bedrooms + Private Pool', guests:4, price:58000, badge:null, img:'https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80', amenities:['Private Pool','Personal Butler','Private Garden','Rolls Royce Transfer','All-Day Dining'] },
+    ]
+  },
+  1: {
+    name: 'Veranda Lake Resort',
+    city: 'Raipur', state: 'Chhattisgarh',
+    stars: 5, img: 'https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
+    tags: ['Lake View','Spa','Restaurant'],
+    amenities: ['Lake View','Spa','Free Wi-Fi','Restaurant','Bar','Room Service','Yoga Centre','Concierge','Boating','Bird Watching','Conference Hall','Laundry'],
+    rooms: [
+      { id:'r1', type:'Classic', name:'Classic Lake View Room', size:30, beds:'1 King', guests:2, price:9800, badge:'value', img:'https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80', amenities:['Lake View','Free Wi-Fi','Mini Bar','Tea/Coffee Maker'] },
+      { id:'r2', type:'Deluxe', name:'Deluxe Waterfront Room', size:40, beds:'1 King or 2 Twin', guests:2, price:13500, badge:'popular', img:'https://images.unsplash.com/photo-1590490360182-c33d57733427?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80', amenities:['Waterfront Balcony','Free Wi-Fi','Rain Shower','Bathrobe & Slippers'] },
+      { id:'r3', type:'Suite', name:'Lakeside Suite', size:62, beds:'1 King + Sitting Area', guests:3, price:22000, badge:'luxury', img:'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80', amenities:['Panoramic Lake View','Butler Service','Plunge Pool','Lounge Access'] },
+      { id:'r4', type:'Villa', name:'Forest Villa', size:100, beds:'2 Bedrooms + Outdoor Deck', guests:4, price:45000, badge:null, img:'https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80', amenities:['Private Forest View','Personal Butler','Outdoor Jacuzzi','All-Day Dining'] },
+    ]
+  },
+  2: {
+    name: 'Veranda on Sea',
+    city: 'Goa', state: 'Goa',
+    stars: 5, img: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
+    tags: ['Beachfront','Infinity Pool','Water Sports'],
+    amenities: ['Private Beach','Infinity Pool','Spa','Free Wi-Fi','Beach Bar','Water Sports','Scuba Diving','Room Service','Fitness Centre','Kids Club','Conference Hall','Laundry'],
+    rooms: [
+      { id:'r1', type:'Classic', name:'Garden View Room', size:34, beds:'1 King', guests:2, price:18500, badge:null, img:'https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80', amenities:['Garden View','Free Wi-Fi','Mini Bar','Rain Shower'] },
+      { id:'r2', type:'Deluxe', name:'Sea View Deluxe Room', size:44, beds:'1 King or 2 Twin', guests:2, price:24500, badge:'popular', img:'https://images.unsplash.com/photo-1590490360182-c33d57733427?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80', amenities:['Sea View Balcony','Free Wi-Fi','Bathtub','Lounge Access'] },
+      { id:'r3', type:'Suite', name:'Ocean Suite', size:72, beds:'1 King + Lounge', guests:3, price:38000, badge:'luxury', img:'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80', amenities:['Panoramic Ocean View','Butler','Jacuzzi','Private Sundeck'] },
+      { id:'r4', type:'Villa', name:'Beachfront Pool Villa', size:140, beds:'2 Bedrooms + Infinity Pool', guests:5, price:85000, badge:null, img:'https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80', amenities:['Direct Beach Access','Private Infinity Pool','Personal Butler','Dedicated Chef'] },
+    ]
+  },
+  3: {
+    name: 'Veranda Manor',
+    city: 'Jungpana', state: 'West Bengal',
+    stars: 5, img: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
+    tags: ['Tea Garden','Heritage','Spa'],
+    amenities: ['Tea Garden Walks','Heritage Library','Spa','Free Wi-Fi','Fine Dining','Campfire','Vintage Car Tours','Room Service','Yoga Centre','Concierge','Conference Hall','Laundry'],
+    rooms: [
+      { id:'r1', type:'Classic', name:'Garden Cottage Room', size:28, beds:'1 King', guests:2, price:14200, badge:'value', img:'https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80', amenities:['Tea Garden View','Free Wi-Fi','Fireplace','Artisanal Tea Selection'] },
+      { id:'r2', type:'Deluxe', name:'Heritage Manor Room', size:38, beds:'1 King or 2 Twin', guests:2, price:19500, badge:'popular', img:'https://images.unsplash.com/photo-1590490360182-c33d57733427?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80', amenities:['Valley View','Claw Foot Bathtub','Butler Service','Heritage Décor'] },
+      { id:'r3', type:'Suite', name:'Planter\'s Suite', size:65, beds:'1 King + Verandah', guests:3, price:32000, badge:'luxury', img:'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80', amenities:['Panoramic Valley View','Personal Planter Guide','Private Verandah','Lounge Access'] },
+      { id:'r4', type:'Villa', name:'The Manor Residence', size:110, beds:'2 Bedrooms + Drawing Room', guests:4, price:62000, badge:null, img:'https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80', amenities:['Exclusive Estate Access','Personal Butler','Private Tea Ceremony','Vintage Car Drop'] },
+    ]
+  },
+  4: {
+    name: 'Veranda Palm Beach Resort',
+    city: 'Visakhapatnam', state: 'Andhra Pradesh',
+    stars: 5, img: 'https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
+    tags: ['Beach Access','Pool','Conference'],
+    amenities: ['Beach Access','Pool','Spa','Free Wi-Fi','Restaurant','Bar','Water Sports','Room Service','Fitness Centre','Concierge','Conference Hall','Laundry'],
+    rooms: [
+      { id:'r1', type:'Classic', name:'Classic Palm Room', size:32, beds:'1 King', guests:2, price:11200, badge:'value', img:'https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80', amenities:['Garden View','Free Wi-Fi','Mini Bar','LCD TV'] },
+      { id:'r2', type:'Deluxe', name:'Sea Breeze Deluxe Room', size:42, beds:'1 King or 2 Twin', guests:2, price:15800, badge:'popular', img:'https://images.unsplash.com/photo-1590490360182-c33d57733427?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80', amenities:['Partial Sea View','Balcony','Rain Shower','Premium Toiletries'] },
+      { id:'r3', type:'Suite', name:'Bay View Suite', size:65, beds:'1 King + Lounge', guests:3, price:26000, badge:'luxury', img:'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80', amenities:['Panoramic Bay View','Butler Service','Jacuzzi','Lounge Access'] },
+      { id:'r4', type:'Villa', name:'Beachfront Villa', size:115, beds:'2 Bedrooms + Private Plunge Pool', guests:4, price:52000, badge:null, img:'https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80', amenities:['Private Beach Cabana','Personal Butler','Plunge Pool','All-Day Dining'] },
+    ]
+  },
+  5: {
+    name: 'Veranda Himalayan Spa Resort',
+    city: 'Shimla', state: 'Himachal Pradesh',
+    stars: 5, img: 'https://images.unsplash.com/photo-1506929562872-bb421503ef21?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
+    tags: ['Mountain View','Full Spa','Yoga'],
+    amenities: ['Mountain View','Full Spa','Yoga Centre','Free Wi-Fi','Fine Dining','Bonfire','Nature Walks','Room Service','Fitness Centre','Concierge','Conference Hall','Laundry'],
+    rooms: [
+      { id:'r1', type:'Classic', name:'Valley View Room', size:30, beds:'1 King', guests:2, price:16800, badge:'value', img:'https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80', amenities:['Valley View','Free Wi-Fi','Fireplace','Mountain Tea'] },
+      { id:'r2', type:'Deluxe', name:'Himalayan Deluxe Room', size:40, beds:'1 King or 2 Twin', guests:2, price:22500, badge:'popular', img:'https://images.unsplash.com/photo-1590490360182-c33d57733427?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80', amenities:['Panoramic Mountain View','Balcony','Heated Floors','Spa Access'] },
+      { id:'r3', type:'Suite', name:'Alpine Suite', size:70, beds:'1 King + Study', guests:3, price:36000, badge:'luxury', img:'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80', amenities:['360° Mountain View','Butler','Hot Tub','Lounge Access','Daily Yoga'] },
+      { id:'r4', type:'Villa', name:'Summit Chalet', size:130, beds:'2 Bedrooms + Verandah', guests:5, price:72000, badge:null, img:'https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80', amenities:['Private Snow View Terrace','Personal Butler','Outdoor Hot Tub','Dedicated Chef'] },
+    ]
+  },
+  6: {
+    name: 'Veranda Tea Resort',
+    city: 'Coorg', state: 'Karnataka',
+    stars: 4, img: 'https://images.unsplash.com/photo-1510798831971-661eb04b3739?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
+    tags: ['Plantation Tours','Pool','Bonfire'],
+    amenities: ['Plantation Tours','Pool','Spa','Free Wi-Fi','Farm Dining','Bonfire Evenings','Birdwatching','Room Service','Yoga','Concierge','Trekking','Laundry'],
+    rooms: [
+      { id:'r1', type:'Classic', name:'Plantation Cottage', size:28, beds:'1 King', guests:2, price:8900, badge:'value', img:'https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80', amenities:['Estate View','Free Wi-Fi','Sit-Out','Coffee Brew Kit'] },
+      { id:'r2', type:'Deluxe', name:'Forest View Deluxe', size:36, beds:'1 King or 2 Twin', guests:2, price:12500, badge:'popular', img:'https://images.unsplash.com/photo-1590490360182-c33d57733427?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80', amenities:['Forest View','Balcony','Rain Shower','Bathrobe'] },
+      { id:'r3', type:'Suite', name:'Planter\'s Bungalow Suite', size:58, beds:'1 King + Sit-Out Room', guests:3, price:21000, badge:'luxury', img:'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80', amenities:['Panoramic Estate View','Butler','Plunge Tub','Lounge Access'] },
+      { id:'r4', type:'Villa', name:'Heritage Estate Villa', size:95, beds:'2 Bedrooms + Private Garden', guests:4, price:42000, badge:null, img:'https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80', amenities:['Private Garden','Personal Butler','Bonfire Deck','Farm-to-Table Dining'] },
+    ]
+  },
+  7: {
+    name: 'Veranda Oasis Resort',
+    city: 'Jaipur', state: 'Rajasthan',
+    stars: 5, img: 'https://images.unsplash.com/photo-1580977276076-ba6caca3e031?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
+    tags: ['Desert View','Heritage Tours','Rooftop Dining'],
+    amenities: ['Heritage Tours','Rooftop Dining','Pool','Spa','Free Wi-Fi','Bar','Camel Safari','Room Service','Fitness Centre','Concierge','Conference Hall','Laundry'],
+    rooms: [
+      { id:'r1', type:'Classic', name:'Haveli Classic Room', size:32, beds:'1 King', guests:2, price:13500, badge:'value', img:'https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80', amenities:['Courtyard View','Free Wi-Fi','Rajput Décor','Mini Bar'] },
+      { id:'r2', type:'Deluxe', name:'Jharokha Deluxe Room', size:44, beds:'1 King or 2 Twin', guests:2, price:18500, badge:'popular', img:'https://images.unsplash.com/photo-1590490360182-c33d57733427?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80', amenities:['Haveli View','Jharokha Balcony','Butler Service','Antique Décor'] },
+      { id:'r3', type:'Suite', name:'Maharana Suite', size:72, beds:'1 King + Durbar Hall', guests:3, price:32000, badge:'luxury', img:'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80', amenities:['City Palace View','Personal Attendant','Private Terrace','Lounge Access'] },
+      { id:'r4', type:'Villa', name:'Royal Rajput Villa', size:120, beds:'2 Bedrooms + Private Courtyard', guests:5, price:65000, badge:null, img:'https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80', amenities:['Private Courtyard Pool','Royal Butler','Heritage Jeep Tour','Private Chef'] },
+    ]
+  },
+  8: {
+    name: 'Veranda Heritage',
+    city: 'Udaipur', state: 'Rajasthan',
+    stars: 5, img: 'https://images.unsplash.com/photo-1549294413-26f195200c16?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
+    tags: ['Lake View','Heritage Wing','Fine Dining'],
+    amenities: ['Lake Pichola View','Heritage Library','Spa','Free Wi-Fi','Fine Dining','Boat Rides','Polo Ground Access','Room Service','Fitness Centre','Concierge','Conference Hall','Laundry'],
+    rooms: [
+      { id:'r1', type:'Classic', name:'Heritage Classic Room', size:36, beds:'1 King', guests:2, price:22000, badge:null, img:'https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80', amenities:['Garden View','Free Wi-Fi','Heritage Décor','Mini Bar'] },
+      { id:'r2', type:'Deluxe', name:'Lake View Deluxe Room', size:48, beds:'1 King or 2 Twin', guests:2, price:32000, badge:'popular', img:'https://images.unsplash.com/photo-1590490360182-c33d57733427?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80', amenities:['Lake Pichola View','Butler Service','Bathtub','Lounge Access'] },
+      { id:'r3', type:'Suite', name:'Royal Suite', size:85, beds:'1 King + Sitting Room', guests:3, price:55000, badge:'luxury', img:'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80', amenities:['Panoramic Lake View','Personal Attendant','Private Terrace','Heritage Dining'] },
+      { id:'r4', type:'Villa', name:'Maharana\'s Residence', size:160, beds:'3 Bedrooms + Private Pool', guests:6, price:120000, badge:null, img:'https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80', amenities:['Lake-Facing Private Pool','Royal Butler','Private Boat','Dedicated Chef','Helicopter Transfer'] },
+    ]
+  },
+};
+
+/* ═══════════════════════════════════════════════════
+   INIT
+═══════════════════════════════════════════════════ */
+const params   = new URLSearchParams(window.location.search);
+const propId   = parseInt(params.get('id') || '0');
+const prop     = PROPERTIES[propId] || PROPERTIES[0];
+const checkIn  = params.get('checkIn')  || '';
+const checkOut = params.get('checkOut') || '';
+const rooms    = parseInt(params.get('rooms') || '1');
+const adults   = parseInt(params.get('adults') || '2');
+const children = parseInt(params.get('children') || '0');
+
+let selectedRoom = null;
+let nightCount   = 1;
+let selectedPay  = 'card';
+
+/* Calculate nights */
+if (checkIn && checkOut) {
+  const d1 = new Date(checkIn);
+  const d2 = new Date(checkOut);
+  const diff = Math.ceil((d2 - d1) / 86400000);
+  if (diff > 0) nightCount = diff;
+}
+
+/* ─── Populate Hero ──────────────────────────────── */
+document.getElementById('hero-prop-name').textContent = prop.name;
+document.getElementById('hero-name').textContent = prop.name;
+document.getElementById('hero-location').textContent = `${prop.city}, ${prop.state}`;
+document.getElementById('hero-bg').innerHTML = '<img src="' + prop.img + '" alt="Hero" style="width:100%;height:100%;object-fit:cover;opacity:0.6;">';
+
+const starsEl = document.getElementById('hero-stars');
+for (let i = 0; i < 5; i++) {
+  starsEl.innerHTML += `<svg viewBox="0 0 24 24" fill="${i < prop.stars ? '#C9A84C':'none'}" stroke="#C9A84C" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`;
+}
+
+const tagsEl = document.getElementById('hero-tags');
+prop.tags.forEach(t => { tagsEl.innerHTML += `<span class="prop-hero__tag">${t}</span>`; });
+
+/* ─── Populate Stay Bar ──────────────────────────── */
+function fmtDate(d) {
+  if (!d) return '—';
+  const dt = new Date(d);
+  return dt.toLocaleDateString('en-IN', { day:'numeric', month:'short', year:'numeric' });
+}
+document.getElementById('bar-checkin').textContent  = fmtDate(checkIn)  || '—';
+document.getElementById('bar-checkout').textContent = fmtDate(checkOut) || '—';
+document.getElementById('bar-nights').textContent   = `${nightCount} night${nightCount !== 1 ? 's':''}`;
+document.getElementById('bar-guests').textContent   = `${rooms} Room · ${adults} Adult${adults>1?'s':''} · ${children} Child${children!==1?'ren':''}`;
+
+/* ─── Populate Summary ───────────────────────────── */
+document.getElementById('summary-prop-name').textContent = prop.name;
+document.getElementById('sum-ci').textContent    = fmtDate(checkIn)  || '—';
+document.getElementById('sum-co').textContent    = fmtDate(checkOut) || '—';
+document.getElementById('sum-nights').textContent = `${nightCount} night${nightCount !== 1 ? 's':''}`;
+document.getElementById('sum-guests').textContent = `${adults} Adults, ${children} Children`;
+
+/* ─── Build Amenities ────────────────────────────── */
+const amenityIcons = {
+  'Pool':          '<path d="M2 20.5l5-5 5 5 5-5 5 5M2 12.5l5-5 5 5 5-5 5 5"/>',
+  'Spa':           '<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/><path d="M12 6v6l4 2"/>',
+  'Free Wi-Fi':    '<path d="M5 12.55a11 11 0 0114.08 0M1.42 9a16 16 0 0121.16 0M8.53 16.11a6 6 0 016.95 0"/><circle cx="12" cy="20" r="1" fill="currentColor" stroke="none"/>',
+  'Restaurant':    '<path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/>',
+  'Bar':           '<path d="M8 22h8M12 11v11M2 2l10 9 10-9"/>',
+  'Fitness Centre':'<path d="M6.5 6.5h11M6.5 17.5h11M3 2v20M21 2v20M3 12h3M18 12h3"/>',
+  'Concierge':     '<path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/>',
+  'Room Service':  '<path d="M22 12h-4l-3 9L9 3l-3 9H2"/>',
+  'Conference Hall':'<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/>',
+  'Laundry':       '<path d="M3 3h18v18H3z" rx="2"/><circle cx="12" cy="12" r="4"/><path d="M12 8v4l3 3"/>',
+  'Lake View':     '<path d="M2 20.5l5-5 5 5 5-5 5 5M2 12l10-8 10 8"/>',
+  'Mountain View': '<path d="M3 20l7-11 5 7 3-4 5 8H3"/>',
+  'Sea View':      '<path d="M2 20.5l5-5 5 5 5-5 5 5"/>',
+  'Heritage Tours':'<path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>',
+  'Yoga Centre':   '<circle cx="12" cy="5" r="2"/><path d="M12 7v6M8 13l4 3 4-3"/>',
+  'default':       '<rect x="3" y="3" width="18" height="18" rx="2"/>',
+};
+
+function getAmenityIcon(name) {
+  for (const [k, v] of Object.entries(amenityIcons)) {
+    if (name.toLowerCase().includes(k.toLowerCase())) return v;
+  }
+  return amenityIcons['default'];
+}
+
+const agEl = document.getElementById('amenities-grid');
+prop.amenities.forEach(a => {
+  agEl.innerHTML += `
+    <div class="amenity-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">${getAmenityIcon(a)}</svg>
+      <span class="amenity-item__label">${a}</span>
+    </div>`;
+});
+
+/* ─── Build Room Cards ───────────────────────────── */
+function fmtPrice(n) {
+  return '₹' + n.toLocaleString('en-IN');
+}
+
+function calcTotal(pricePerNight) {
+  const sub  = pricePerNight * nightCount * rooms;
+  const tax  = Math.round(sub * 0.18);
+  const fee  = 500;
+  return { sub, tax, fee, total: sub + tax + fee };
+}
+
+const listEl = document.getElementById('rooms-list');
+document.getElementById('rooms-count-text').textContent = `${prop.rooms.length} room types available for ${nightCount} night${nightCount!==1?'s':''}`;
+
+prop.rooms.forEach((room, idx) => {
+  const { sub, tax, total } = calcTotal(room.price);
+  const chips = room.amenities.map(a => `<span class="room-chip">${a}</span>`).join('');
+  const badge = room.badge
+    ? `<div class="room-card__badge badge--${room.badge}">${room.badge === 'popular' ? '⭐ Most Popular' : room.badge === 'luxury' ? '♛ Luxury Pick' : '✓ Best Value'}</div>`
+    : '';
+
+  listEl.innerHTML += `
+    <div class="room-card" id="card-${room.id}">
+      <div class="room-card__inner">
+        <div class="room-card__img">
+          <div class="room-card__img-bg" style="background:${room.bg};width:100%;height:100%;"></div>
+          ${badge}
+        </div>
+        <div class="room-card__body">
+          <div class="room-card__top">
+            <div class="room-card__type">${room.type}</div>
+            <div class="room-card__name">${room.name}</div>
+            <div class="room-card__meta">
+              <span class="room-card__meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+                ${room.size} m²
+              </span>
+              <span class="room-card__meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7v13h18V7M3 7a2 2 0 012-2h14a2 2 0 012 2M3 13h18"/></svg>
+                ${room.beds}
+              </span>
+              <span class="room-card__meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+                Up to ${room.guests} guests
+              </span>
+            </div>
+            <div class="room-card__amenities">${chips}</div>
+          </div>
+          <hr class="room-card__divider">
+          <div class="room-card__bottom">
+            <div>
+              <div class="room-card__price-label">From</div>
+              <div class="room-card__price">${fmtPrice(room.price)}</div>
+              <div class="room-card__price-night">per night + taxes</div>
+              <div class="room-card__total">Total for ${nightCount} night${nightCount!==1?'s':''}: ${fmtPrice(total)}</div>
+            </div>
+            <button class="btn-select" onclick="selectRoom('${room.id}',${idx})">
+              Select Room
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>`;
+});
+
+/* ─── Select a Room ──────────────────────────────── */
+function selectRoom(roomId, idx) {
+  selectedRoom = prop.rooms[idx];
+  const { sub, tax, fee, total } = calcTotal(selectedRoom.price);
+
+  // Highlight card
+  document.querySelectorAll('.room-card').forEach(c => c.style.outline = '');
+  const card = document.getElementById('card-' + roomId);
+  if (card) {
+    card.style.outline = '2px solid #8B4513';
+    card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  // Update summary panel
+  document.getElementById('summary-placeholder').style.display = 'none';
+  document.getElementById('summary-detail').style.display = 'block';
+  document.getElementById('summary-selected-card').classList.add('show');
+  document.getElementById('summary-room-name').textContent = selectedRoom.name;
+  document.getElementById('summary-room-price').textContent = fmtPrice(selectedRoom.price) + ' / night';
+  document.getElementById('sum-total').textContent = fmtPrice(total);
+
+  // Update panel data
+  document.getElementById('panel-room-name').textContent = selectedRoom.name;
+  document.getElementById('panel-room-name-2').textContent = selectedRoom.name;
+  document.getElementById('panel-prop-name').textContent = prop.name;
+  document.getElementById('panel-room-price').textContent = fmtPrice(selectedRoom.price) + ' / night';
+  document.getElementById('panel-room-img').style.background = selectedRoom.bg;
+
+  // Price breakdown
+  document.getElementById('br-nights-label').textContent = `${nightCount} night${nightCount!==1?'s':''} × ${fmtPrice(selectedRoom.price)} × ${rooms} room${rooms>1?'s':''}`;
+  document.getElementById('br-subtotal').textContent = fmtPrice(sub);
+  document.getElementById('br-tax').textContent = fmtPrice(tax);
+  document.getElementById('br-total').textContent = fmtPrice(sub + tax + fee);
+}
+
+function openPanel() {
+  if (!selectedRoom) return;
+  document.getElementById('booking-panel').classList.add('open');
+  document.getElementById('panel-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closePanel() {
+  document.getElementById('booking-panel').classList.remove('open');
+  document.getElementById('panel-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.getElementById('panel-close').addEventListener('click', closePanel);
+document.getElementById('panel-overlay').addEventListener('click', closePanel);
+
+/* ─── Step Navigation ────────────────────────────── */
+function goToPayment() {
+  const fn = document.getElementById('bf-firstname')?.value.trim();
+  const ln = document.getElementById('bf-lastname')?.value.trim();
+  const em = document.getElementById('bf-email')?.value.trim();
+  const ph = document.getElementById('bf-phone')?.value.trim();
+
+  if (!fn || !ln || !em || !ph) {
+    [['bf-firstname',fn],['bf-lastname',ln],['bf-email',em],['bf-phone',ph]].forEach(([id, val]) => {
+      const el = document.getElementById(id);
+      if (el && !val) {
+        el.style.borderBottomColor = '#c0392b';
+        el.focus();
+        setTimeout(() => el.style.borderBottomColor = '', 2500);
+      }
+    });
+    return;
+  }
+
+  document.getElementById('panel-step-1').style.display = 'none';
+  document.getElementById('panel-step-2').style.display = 'block';
+  document.getElementById('step-1').classList.remove('active');
+  document.getElementById('step-1').classList.add('done');
+  document.getElementById('step-2').classList.add('active');
+  document.getElementById('step-3').classList.remove('active');
+}
+
+function backToDetails() {
+  document.getElementById('panel-step-2').style.display = 'none';
+  document.getElementById('panel-step-1').style.display = 'block';
+  document.getElementById('step-2').classList.remove('active');
+  document.getElementById('step-1').classList.remove('done');
+  document.getElementById('step-1').classList.add('active');
+}
+
+function confirmBooking() {
+  // Generate random booking reference
+  const ref = 'VHR-' + Math.random().toString(36).substr(2, 6).toUpperCase();
+  const fn  = document.getElementById('bf-firstname')?.value.trim() || 'Guest';
+  const ln  = document.getElementById('bf-lastname')?.value.trim() || '';
+  const { sub, tax, fee, total } = calcTotal(selectedRoom.price);
+
+  // Show success
+  document.getElementById('panel-body').style.display = 'none';
+  document.getElementById('success-screen').classList.add('show');
+  document.getElementById('success-ref').textContent = ref;
+  document.getElementById('success-sub').innerHTML = `Your stay at <strong>${prop.name}</strong> has been confirmed, ${fn}!<br>A confirmation email has been sent.`;
+
+  document.getElementById('success-details').innerHTML = `
+    <div class="success-detail-item"><div class="success-detail-item__label">Room</div><div class="success-detail-item__value">${selectedRoom.name}</div></div>
+    <div class="success-detail-item"><div class="success-detail-item__label">Property</div><div class="success-detail-item__value">${prop.name}</div></div>
+    <div class="success-detail-item"><div class="success-detail-item__label">Check In</div><div class="success-detail-item__value">${fmtDate(checkIn) || '—'}</div></div>
+    <div class="success-detail-item"><div class="success-detail-item__label">Check Out</div><div class="success-detail-item__value">${fmtDate(checkOut) || '—'}</div></div>
+    <div class="success-detail-item"><div class="success-detail-item__label">Nights</div><div class="success-detail-item__value">${nightCount}</div></div>
+    <div class="success-detail-item"><div class="success-detail-item__label">Total Paid</div><div class="success-detail-item__value" style="color:#8B4513;">${fmtPrice(total)}</div></div>
+  `;
+}
+
+/* ─── Payment Selection ──────────────────────────── */
+function selectPay(type) {
+  selectedPay = type;
+  ['card','upi','nb'].forEach(t => {
+    document.getElementById('pay-' + t)?.classList.toggle('selected', t === type);
+    const formEl = document.getElementById(t === 'nb' ? 'nb-form' : t + '-form');
+    if (formEl) formEl.style.display = t === type ? 'block' : 'none';
+  });
+}
+
+/* ─── Card Formatting ────────────────────────────── */
+function formatCard(el) {
+  let v = el.value.replace(/\D/g,'').slice(0,16);
+  el.value = v.replace(/(.{4})/g,'$1 ').trim();
+}
+function formatExpiry(el) {
+  let v = el.value.replace(/\D/g,'');
+  if (v.length >= 2) v = v.slice(0,2) + ' / ' + v.slice(2,4);
+  el.value = v;
+}
+</script>
+<!-- ─── Footer Wrappers ──────────────────────────────── -->
+<div id="footer-wrapper"></div>
+<div id="contact-tab-wrapper"></div>
+<div id="scroll-top-wrapper"></div>
+
+<!-- ─── JS ─────────────────────────────────────────────── -->
+<script src="js/components.js"></script>
+<script>
+  renderComponents();
+</script>
+</body>
+</html>

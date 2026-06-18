@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Veranda Hotels & Resorts — Luxury Properties Across India</title>
+  <meta name="description" content="Veranda Hotels & Resorts — India's premier luxury hotel group with 12 properties across breathtaking destinations. Book your stay at Goa, Shimla, Coorg, Jaipur, and beyond.">
+  <meta name="keywords" content="Veranda Hotels, luxury resorts India, boutique hotels, Goa resort, Shimla hotel, Coorg resort, heritage hotel India">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="styles/global.css">
+  <style>
+    /* ─── Page-specific overrides & image backgrounds ─────────── */
+
+    /* Hero gradient fallback when image loads */
+    .hero-slide-1 { background: linear-gradient(135deg, #1C1008 0%, #5C3320 50%, #3D2010 100%); }
+    .hero-slide-2 { background: linear-gradient(135deg, #2A1808 0%, #6B3D1E 40%, #1C1008 100%); }
+    .hero-slide-3 { background: linear-gradient(135deg, #1C1008 0%, #5C3320 50%, #8B4513 100%); }
+
+    /* Property card color backgrounds */
+    .prop-bg-1 { background: linear-gradient(135deg, #5C3320, #8B4513); }
+    .prop-bg-2 { background: linear-gradient(135deg, #1C1008, #5C3320); }
+    .prop-bg-3 { background: linear-gradient(135deg, #8B4513, #C17A3A); }
+    .prop-bg-4 { background: linear-gradient(135deg, #4A2518, #5C3320); }
+    .prop-bg-5 { background: linear-gradient(135deg, #3D1A0A, #8B4513); }
+    .prop-bg-6 { background: linear-gradient(135deg, #2A1508, #4A2518); }
+    .prop-bg-7 { background: linear-gradient(135deg, #1C1008, #3D2010); }
+    .prop-bg-8 { background: linear-gradient(135deg, #5C3320, #8B6040); }
+    .prop-bg-9 { background: linear-gradient(135deg, #2A1008, #5C3320); }
+
+    /* Heritage card backgrounds */
+    .hbg-1 { background: linear-gradient(135deg, #2c1a0e, #5c3a1a); }
+    .hbg-2 { background: linear-gradient(135deg, #1a0e08, #3a200e); }
+    .hbg-3 { background: linear-gradient(135deg, #1a1008, #3a2808); }
+
+    /* Spotlight card backgrounds */
+    .sbg-1 { background: linear-gradient(135deg, #2A1808, #8B4513); }
+    .sbg-2 { background: linear-gradient(135deg, #2c1a10, #6b3d1e); }
+    .sbg-3 { background: linear-gradient(135deg, #1a1008, #3a2010); }
+
+    /* Location bg */
+    .loc-bg-goa      { background: linear-gradient(135deg, #003d5c, #0077b6); }
+    .loc-bg-mountain { background: linear-gradient(135deg, #1a2a3a, #3a5a7a); }
+
+    /* ─── About Section image styling ────────────────────────── */
+    .about-img-wrap {
+      position: relative;
+      height: 520px;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.18);
+    }
+
+    .about-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .about-img-badge {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      background: rgba(23,39,34,0.92);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(201,168,76,0.4);
+      padding: 14px 20px;
+      border-radius: 6px;
+      text-align: right;
+    }
+
+    .about-img-badge__num {
+      font-family: 'Outfit', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #C9A84C;
+      line-height: 1;
+    }
+
+    .about-img-badge__label {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+    }
+
+    /* ─── Hero Text (no caption, as per brief) ─────────────────── */
+    .hero-carousel .carousel__slide {
+      display: flex;
+      align-items: flex-end;
+    }
+
+    /* ─── Explore Section ─────────────────────────────────────── */
+    .explore-carousel {
+      position: relative;
+    }
+
+    .explore-slide__img {
+      width: 100%;
+      height: 440px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .explore-slide-bg-goa     { background: linear-gradient(135deg, #003d5c, #0077b6); height: 440px; border-radius: 8px; }
+    .explore-slide-bg-mnt     { background: linear-gradient(135deg, #1a2530, #3a5a8a); height: 440px; border-radius: 8px; }
+    .explore-slide-bg-her     { background: linear-gradient(135deg, #3a1a0a, #7a3a1a); height: 440px; border-radius: 8px; }
+
+    /* ─── Room Card icons (pattern SVG in bg) ─────────────────── */
+    .room-card-pattern {
+      position: absolute;
+      inset: 0;
+      opacity: 0.07;
+      background-image: repeating-linear-gradient(
+        45deg,
+        rgba(168,200,40,0.5) 0px,
+        rgba(168,200,40,0.5) 1px,
+        transparent 1px,
+        transparent 12px
+      );
+    }
+
+    /* ─── Section divider line ────────────────────────────────── */
+    .section-rule {
+      width: 60px;
+      height: 2px;
+      background: var(--clr-accent);
+      margin: 0 auto var(--space-md);
+    }
+
+    /* ─── Tagline band dots ───────────────────────────────────── */
+    #tagline-dots .carousel__dot {
+      background: rgba(139,69,19,0.3);
+    }
+    #tagline-dots .carousel__dot.active {
+      background: var(--clr-logo);
+    }
+  </style>
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%235C3320'/><text x='50' y='70' font-family='serif' font-size='60' font-style='italic' fill='%23C9A84C' text-anchor='middle'>V</text></svg>">
+</head>
+<body>
+
+<!-- Fixed UI Elements -->
+<div id="header-wrapper"></div>
+<div id="contact-tab-wrapper"></div>
+<div id="scroll-top-wrapper"></div>
+
+<main id="main-content">
+
+  <!-- ═══════════════════════════════════════════════════
+       1. HERO CAROUSEL
+  ═══════════════════════════════════════════════════ -->
+  <section class="hero-carousel carousel" id="hero-carousel" aria-label="Featured properties">
+    <div class="carousel__track">
+
+      <!-- Slide 1: Flagship property -->
+      <div class="carousel__slide hero-slide-1">
+        <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80"
+             alt="Veranda Lagoon Resort — flagship property"
+             style="width:100%;height:100%;object-fit:cover;display:block;"
+             loading="eager">
+      </div>
+
+      <!-- Slide 2: Pool at sunset -->
+      <div class="carousel__slide hero-slide-2">
+        <img src="images/hero-2.jpg"
+             alt="Veranda on Sea Goa — infinity pool merging with the Arabian Sea at golden hour"
+             style="width:100%;height:100%;object-fit:cover;display:block;"
+             loading="lazy">
+      </div>
+
+      <!-- Slide 3: Himalayan resort (gradient placeholder) -->
+      <div class="carousel__slide hero-slide-3"
+           style="position:relative;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:1rem;">
+        <img src="https://images.unsplash.com/photo-1506929562872-bb421503ef21?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" alt="Himalayan Resort" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;">
+        <div style="position:absolute;inset:0;background:rgba(0,0,0,0.4);z-index:0;"></div>
+        <div style="text-align:center;padding:2rem;position:relative;z-index:1;">
+          <p style="font-family:'Outfit',sans-serif;font-size:0.7rem;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.6);margin-bottom:1rem;">Veranda Himalayan Spa Resort</p>
+          <h2 style="font-family:'Outfit',sans-serif;font-size:clamp(2rem,5vw,4rem);font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:white;line-height:1.1;">Where the Mountains<br>Meet Luxury</h2>
+          <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.5rem;color:rgba(201,168,76,0.9);margin-top:1rem;">Shimla, Himachal Pradesh</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Arrows -->
+    <button class="carousel__arrow carousel__arrow--prev" aria-label="Previous slide">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <button class="carousel__arrow carousel__arrow--next" aria-label="Next slide">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════
+       2. TAGLINE BAND + BOOKING WIDGET
+  ═══════════════════════════════════════════════════ -->
+  <section class="tagline-band" aria-labelledby="tagline-heading">
+    <div style="display:flex;align-items:center;justify-content:center;gap:1rem;flex-wrap:wrap;">
+      <div id="tagline-text" class="tagline-band__text" id="tagline-heading">
+        Where Nature Meets Unmatched Luxury
+      </div>
+      <a href="tel:+918047474747" class="tagline-band__phone-btn" aria-label="Call central reservations">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 015.19 12.9a19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/>
+        </svg>
+      </a>
+    </div>
+    <!-- Tagline carousel dots (visual only) -->
+    <div style="display:flex;justify-content:center;gap:8px;margin-top:10px;" id="tagline-dots">
+      <button class="carousel__dot active" style="background:#8B4513;" aria-label="Tagline 1"></button>
+      <button class="carousel__dot" style="background:rgba(139,69,19,0.3);" aria-label="Tagline 2"></button>
+      <button class="carousel__dot" style="background:rgba(139,69,19,0.3);" aria-label="Tagline 3"></button>
+    </div>
+  </section>
+
+  <!-- Booking Widget -->
+  <div id="booking-widget-container" role="search" aria-label="Book your stay"></div>
+
+  <!-- Mandala Divider -->
+  <div class="mandala-divider" aria-hidden="true">
+    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="50" cy="50" r="48" stroke="currentColor" stroke-width="1"/>
+      <circle cx="50" cy="50" r="36" stroke="currentColor" stroke-width="0.8"/>
+      <circle cx="50" cy="50" r="20" stroke="currentColor" stroke-width="0.6"/>
+      <circle cx="50" cy="50" r="8" fill="currentColor" opacity="0.4"/>
+      ${Array.from({length:12}, (_,i) => {
+        const a = i * 30;
+        const r = 28;
+        const x = 50 + r * Math.sin(a * Math.PI / 180);
+        const y = 50 - r * Math.cos(a * Math.PI / 180);
+        return `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="2.5" fill="currentColor" opacity="0.5"/>`;
+      }).join('')}
+    </svg>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════════════
+       3. ABOUT THE BRAND
+  ═══════════════════════════════════════════════════ -->
+  <section class="section-about section-pad" id="about" aria-labelledby="about-heading">
+    <div class="container">
+      <div class="two-col">
+
+        <!-- Image Left -->
+        <div class="about-img-wrap reveal">
+          <img src="images/about-aerial.jpg"
+               alt="Aerial view of Veranda Lagoon Resort — red terracotta roofs and blue lagoon surrounded by palm trees"
+               loading="lazy">
+          <div class="about-img-badge">
+            <div class="about-img-badge__num">35+</div>
+            <div class="about-img-badge__label">Years of Crafting<br>Memories</div>
+          </div>
+        </div>
+
+        <!-- Text Right -->
+        <div class="two-col__content reveal" style="animation-delay:0.15s;">
+          <p class="two-col__eyebrow">Est. 1989 · Hyderabad, India</p>
+          <h2 class="two-col__heading" id="about-heading">About The Brand</h2>
+          <p class="two-col__sub">A Legacy Written in Stone and Story</p>
+          <p class="two-col__text">
+            In 1989, visionary hotelier Rajan Krishnamurthy set out to create something India had never quite seen before — a collection of luxury properties that felt less like hotels and more like homes you happened to love deeply. Beginning with a single heritage bungalow in Coorg, Veranda Hotels & Resorts has grown into a curated family of twelve properties spanning pristine coastlines, misty mountain ridges, and ancient heritage cities.
+          </p>
+          <p class="two-col__text">
+            Every Veranda property is designed with a philosophy of low-rise, low-footprint architecture — buildings that belong to their landscapes rather than impose upon them. Biodiverse gardens, local artisan craftsmanship, and a fierce commitment to regional cuisine define the experience. Guests don't check into a Veranda property; they arrive home to a place they've never been before.
+          </p>
+          <a href="#" class="btn-primary" aria-label="Learn more about Veranda Hotels">
+            Learn More <span class="chevron">›</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════
+       4. LOCATIONS
+  ═══════════════════════════════════════════════════ -->
+  <section class="section-locations section-pad" id="locations" aria-labelledby="locations-heading">
+    <div class="container">
+      <div class="two-col two-col--reverse">
+
+        <!-- Text Left (visually, due to reverse) -->
+        <div class="two-col__content reveal">
+          <p class="two-col__eyebrow">12 Properties · 10 States</p>
+          <h2 class="two-col__heading" id="locations-heading">Locations</h2>
+          <p class="two-col__sub">From Sea-Level to the Stars</p>
+          <p class="two-col__text">
+            Pristine white beaches where the Arabian Sea laps at ancient Portuguese forts. Tea-garden valleys where morning mist rolls over emerald hillsides. Desert palaces where centuries of Rajput history echo through every carved sandstone column. Veranda's twelve properties are deliberately spread to cover India's most extraordinary natural and heritage landscapes.
+          </p>
+          <p class="two-col__text">
+            Whether you seek the thundering silence of the Himalayas at Shimla, the salt-and-spice coastal air of Vizag, or the haunting serenity of Varanasi's ghats at dawn, a Veranda property sits close enough to immerse you fully — yet far enough removed to give you perfect peace.
+          </p>
+          <a href="#rooms" class="btn-primary" aria-label="Explore all Veranda locations">
+            Explore <span class="chevron">›</span>
+          </a>
+        </div>
+
+        <!-- Image Right (visually) -->
+        <div class="reveal" style="animation-delay:0.15s;">
+          <div class="loc-bg-goa" style="height:480px;border-radius:8px;box-shadow:0 8px 40px rgba(0,0,0,0.18);display:flex;align-items:flex-end;padding:1.5rem;position:relative;overflow:hidden;">
+            <img src="https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Goa location" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+            <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 60%);"></div>
+            <!-- Decorative waves -->
+            <svg style="position:absolute;bottom:0;left:0;right:0;opacity:0.3;" viewBox="0 0 400 60" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0 30 Q50 0 100 30 T200 30 T300 30 T400 30 L400 60 L0 60 Z" fill="white"/>
+            </svg>
+            <div style="position:relative;z-index:1;">
+              <p style="font-family:'Outfit',sans-serif;font-size:0.6rem;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.7);margin-bottom:4px;">Goa · Vizag · Coorg · Jaipur · Shimla</p>
+              <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.4rem;color:white;">and seven more destinations...</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════
+       5. IN THE SPOTLIGHT
+  ═══════════════════════════════════════════════════ -->
+  <section class="section-spotlight section-pad" id="spotlight" aria-labelledby="spotlight-heading">
+    <div class="container">
+      <div class="section-spotlight__header">
+        <div class="notched-badge-wrap">
+          <div class="notched-badge">
+            <span class="notched-badge__text">In The Spotlight</span>
+          </div>
+        </div>
+        <div class="section-rule"></div>
+        <p class="two-col__eyebrow" style="text-align:center;">Three reasons to choose Veranda</p>
+      </div>
+
+      <div class="grid-3">
+
+        <!-- Card 1: Lush Greenery -->
+        <div class="spotlight-card reveal">
+          <div class="sbg-1" style="height:240px;position:relative;overflow:hidden;">
+            <img src="https://images.unsplash.com/photo-1510798831971-661eb04b3739?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.8;">
+            <!-- Leaf pattern -->
+            <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.12;" viewBox="0 0 200 200">
+              <circle cx="100" cy="100" r="80" stroke="white" stroke-width="1" fill="none"/>
+              <circle cx="100" cy="100" r="50" stroke="white" stroke-width="0.8" fill="none"/>
+              ${Array.from({length:8},(_,i)=>{const a=i*45;const x=100+60*Math.sin(a*Math.PI/180);const y=100-60*Math.cos(a*Math.PI/180);return `<ellipse transform="rotate(${a},100,100)" cx="100" cy="55" rx="8" ry="18" fill="white" opacity="0.8"/>`;}).join('')}
+            </svg>
+            <div style="position:absolute;bottom:1rem;left:1rem;right:1rem;text-align:center;">
+              <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.4rem;color:rgba(201,168,76,0.95);">Amid Lush Greenery</p>
+            </div>
+          </div>
+          <div class="spotlight-card__body">
+            <h3 class="spotlight-card__heading">Amid Lush Greenery</h3>
+            <p class="spotlight-card__text">Each Veranda property is cradled within — not placed upon — its natural surroundings. Ancient rain trees, rare orchid gardens, and biodiverse ecosystems form the living backdrop to your stay. Our horticulture teams maintain native species that have thrived here for centuries.</p>
+          </div>
+        </div>
+
+        <!-- Card 2: Heritage Vibe -->
+        <div class="spotlight-card reveal" style="animation-delay:0.1s;">
+          <div class="sbg-2" style="height:240px;position:relative;overflow:hidden;">
+            <img src="https://images.unsplash.com/photo-1549294413-26f195200c16?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.8;">
+            <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.1;" viewBox="0 0 200 200">
+              <rect x="60" y="40" width="80" height="120" rx="4" stroke="white" stroke-width="1" fill="none"/>
+              <rect x="75" y="55" width="20" height="30" rx="2" stroke="white" stroke-width="0.8" fill="none"/>
+              <rect x="105" y="55" width="20" height="30" rx="2" stroke="white" stroke-width="0.8" fill="none"/>
+              <path d="M100 40 L60 70" stroke="white" stroke-width="0.8"/>
+              <path d="M100 40 L140 70" stroke="white" stroke-width="0.8"/>
+            </svg>
+            <div style="position:absolute;bottom:1rem;left:1rem;right:1rem;text-align:center;">
+              <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.4rem;color:rgba(255,200,120,0.95);">A Heritage Vibe</p>
+            </div>
+          </div>
+          <div class="spotlight-card__body">
+            <h3 class="spotlight-card__heading">A Heritage Vibe</h3>
+            <p class="spotlight-card__text">Founder Rajan Krishnamurthy's lifelong passion for preservation shaped every Veranda property. Vintage automobiles, antique grand pianos, and rare colonial-era artefacts are displayed — not archived — throughout each resort. History is not decoration here; it is the point.</p>
+          </div>
+        </div>
+
+        <!-- Card 3: Wellness -->
+        <div class="spotlight-card reveal" style="animation-delay:0.2s;">
+          <div class="sbg-3" style="height:240px;position:relative;overflow:hidden;">
+            <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.8;">
+            <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.1;" viewBox="0 0 200 200">
+              <circle cx="100" cy="100" r="60" stroke="white" stroke-width="1" fill="none"/>
+              <path d="M100 60 Q120 80 100 100 Q80 120 100 140" stroke="white" stroke-width="1" fill="none"/>
+              <circle cx="100" cy="100" r="8" fill="white" opacity="0.6"/>
+            </svg>
+            <div style="position:absolute;bottom:1rem;left:1rem;right:1rem;text-align:center;">
+              <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.4rem;color:rgba(120,190,255,0.95);">Wellness & Rejuvenation</p>
+            </div>
+          </div>
+          <div class="spotlight-card__body">
+            <h3 class="spotlight-card__heading">Wellness & Rejuvenation</h3>
+            <p class="spotlight-card__text">Every Veranda property hosts a dedicated Serenity Spa drawing on Kerala Ayurveda traditions, trained therapists, and locally sourced botanical ingredients. Our wellness philosophy extends beyond the treatment room — it permeates the menu, the architecture, and the rhythm of each day.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════
+       6. EXPLORE INDIA
+  ═══════════════════════════════════════════════════ -->
+  <section class="section-explore section-pad" id="explore" aria-labelledby="explore-heading">
+    <div class="container">
+      <h2 class="text-h1 clr-logo" style="text-align:center;margin-bottom:0.5rem;" id="explore-heading">Explore India</h2>
+      <div class="section-rule"></div>
+
+      <!-- Carousel of destinations -->
+      <div class="carousel explore-carousel" id="explore-carousel" style="margin-top:2rem;">
+        <div class="carousel__track">
+
+          <!-- Goa -->
+          <div class="carousel__slide">
+            <div class="two-col">
+              <div class="explore-slide-bg-goa reveal" style="position:relative;overflow:hidden;border-radius:8px;box-shadow:0 8px 40px rgba(0,0,0,0.18);">
+                <img src="https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+                <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.5) 0%,transparent 60%);"></div>
+                <div style="position:absolute;bottom:1.5rem;left:1.5rem;">
+                  <p style="font-family:'Outfit',sans-serif;font-size:0.6rem;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.7);">Veranda on Sea · Goa</p>
+                  <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.6rem;color:white;">Where the land ends<br>and wonder begins</p>
+                </div>
+              </div>
+              <div class="two-col__content reveal" style="animation-delay:0.15s;">
+                <p class="section-explore__super">Destination 01 of 03</p>
+                <h3 class="section-explore__title">Explore India</h3>
+                <p class="section-explore__dest">Discover Goa</p>
+                <p class="two-col__text">
+                  The Arabian Sea breathes differently along Goa's northern coast — slower, saltier, richer. Veranda on Sea sits where Portuguese colonial architecture meets India's most celebrated shoreline: whitewashed walls, bougainvillea terraces, and a pool that seems to pour directly into the horizon. It is equal parts history and hedonism.
+                </p>
+                <a href="#" class="btn-primary">Explore <span class="chevron">›</span></a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Shimla -->
+          <div class="carousel__slide">
+            <div class="two-col">
+              <div style="background:linear-gradient(135deg,#1a2530,#2a4060,#3a6080);height:440px;border-radius:8px;box-shadow:0 8px 40px rgba(0,0,0,0.18);position:relative;overflow:hidden;">
+                <img src="https://images.unsplash.com/photo-1506929562872-bb421503ef21?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+                <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.5) 0%,transparent 60%);"></div>
+                <!-- Snow effect -->
+                <div style="position:absolute;top:20%;left:0;right:0;height:80px;background:linear-gradient(to bottom,transparent,rgba(255,255,255,0.1));"></div>
+                <div style="position:absolute;bottom:1.5rem;left:1.5rem;">
+                  <p style="font-family:'Outfit',sans-serif;font-size:0.6rem;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.7);">Veranda Himalayan Spa Resort · Shimla</p>
+                  <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.6rem;color:white;">High altitude.<br>Deeper calm.</p>
+                </div>
+              </div>
+              <div class="two-col__content">
+                <p class="section-explore__super">Destination 02 of 03</p>
+                <h3 class="section-explore__title">Explore India</h3>
+                <p class="section-explore__dest">Discover Shimla</p>
+                <p class="two-col__text">
+                  At 2,200 metres above sea level, Shimla exists in a different register entirely — pine-scented air, Victorian-era architecture draped in mist, and a quietude that the plains can only dream of. Veranda Himalayan Spa Resort is the definitive mountain retreat: warm stone interiors, open log fires, and a wellness programme designed around altitude and ancient Himalayan herbs.
+                </p>
+                <a href="#" class="btn-primary">Explore <span class="chevron">›</span></a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Jaipur -->
+          <div class="carousel__slide">
+            <div class="two-col">
+              <div style="background:linear-gradient(135deg,#3a1a0a,#7a3a1a,#b05020);height:440px;border-radius:8px;box-shadow:0 8px 40px rgba(0,0,0,0.18);position:relative;overflow:hidden;">
+                <img src="https://images.unsplash.com/photo-1580977276076-ba6caca3e031?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+                <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.5) 0%,transparent 60%);"></div>
+                <div style="position:absolute;bottom:1.5rem;left:1.5rem;">
+                  <p style="font-family:'Outfit',sans-serif;font-size:0.6rem;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.7);">Veranda Oasis Resort · Jaipur</p>
+                  <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.6rem;color:white;">A thousand years<br>of splendour.</p>
+                </div>
+              </div>
+              <div class="two-col__content">
+                <p class="section-explore__super">Destination 03 of 03</p>
+                <h3 class="section-explore__title">Explore India</h3>
+                <p class="section-explore__dest">Discover Jaipur</p>
+                <p class="two-col__text">
+                  Jaipur is India's Pink City — a Rajput capital where every sandstone facade tells a story of courts, battles, and celestial ambition. Veranda Oasis Resort & Convention sits in the old city's quieter quarter, a haveli-style property where scalloped archways frame desert gardens, and evenings glow with the warmth of a thousand diyas at the rooftop dining terrace.
+                </p>
+                <a href="#" class="btn-primary">Explore <span class="chevron">›</span></a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Explore arrows -->
+        <button class="carousel__arrow carousel__arrow--prev carousel__arrow--opaque" style="left:-24px;" aria-label="Previous destination">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button class="carousel__arrow carousel__arrow--next carousel__arrow--opaque" style="right:-24px;" aria-label="Next destination">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+
+        <div class="carousel__dots" id="explore-dots"></div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════
+       7. SUITES & ROOMS
+  ═══════════════════════════════════════════════════ -->
+  <section class="section-rooms section-pad" id="rooms" aria-labelledby="rooms-heading">
+    <div class="container">
+      <div class="notched-badge-wrap">
+        <div class="notched-badge">
+          <span class="notched-badge__text" id="rooms-heading">Suites &amp; Rooms</span>
+        </div>
+      </div>
+      <div class="section-rule"></div>
+      <p style="text-align:center;margin-bottom:2.5rem;font-size:0.82rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--clr-body);">Explore All Veranda Properties</p>
+
+      <div class="rooms-grid">
+
+        <!-- Property 1 -->
+        <a href="booking.html" class="caption-card"
+           style="background: url('https://images.unsplash.com/photo-1510798831971-661eb04b3739?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80') center/cover;" aria-label="Veranda Lagoon Bhubaneswar">
+          <div class="room-card-pattern"></div>
+          <div class="caption-card__scrim"></div>
+          <div class="caption-card__body">
+            <div class="caption-card__name">Veranda Lagoon</div>
+            <div class="caption-card__city">Bhubaneswar, Odisha</div>
+          </div>
+        </a>
+
+        <!-- Property 2 -->
+        <a href="booking.html" class="caption-card"
+           style="background: url('https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80') center/cover;" aria-label="Veranda Lake Resort Raipur">
+          <div class="room-card-pattern"></div>
+          <div class="caption-card__scrim"></div>
+          <div class="caption-card__body">
+            <div class="caption-card__name">Veranda Lake Resort</div>
+            <div class="caption-card__city">Raipur, Chhattisgarh</div>
+          </div>
+        </a>
+
+        <!-- Property 3 -->
+        <a href="booking.html" class="caption-card"
+           style="background: url('https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80') center/cover;" aria-label="Veranda on Sea Goa">
+          <div class="room-card-pattern"></div>
+          <div class="caption-card__scrim"></div>
+          <div class="caption-card__body">
+            <div class="caption-card__name">Veranda on Sea</div>
+            <div class="caption-card__city">Goa</div>
+          </div>
+        </a>
+
+        <!-- Property 4 -->
+        <a href="booking.html" class="caption-card"
+           style="background: url('https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80') center/cover;" aria-label="Veranda Manor Jungpana">
+          <div class="room-card-pattern"></div>
+          <div class="caption-card__scrim"></div>
+          <div class="caption-card__body">
+            <div class="caption-card__name">Veranda Manor</div>
+            <div class="caption-card__city">Jungpana, West Bengal</div>
+          </div>
+        </a>
+
+        <!-- Property 5 -->
+        <a href="booking.html" class="caption-card"
+           style="background: url('https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80') center/cover;" aria-label="Veranda Palm Beach Resort Vizag">
+          <div class="room-card-pattern"></div>
+          <div class="caption-card__scrim"></div>
+          <div class="caption-card__body">
+            <div class="caption-card__name">Veranda Palm Beach Resort</div>
+            <div class="caption-card__city">Visakhapatnam, Andhra Pradesh</div>
+          </div>
+        </a>
+
+        <!-- Property 6 -->
+        <a href="booking.html" class="caption-card"
+           style="background: url('https://images.unsplash.com/photo-1506929562872-bb421503ef21?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80') center/cover;" aria-label="Veranda Himalayan Spa Resort Shimla">
+          <div class="room-card-pattern"></div>
+          <div class="caption-card__scrim"></div>
+          <div class="caption-card__body">
+            <div class="caption-card__name">Veranda Himalayan Spa Resort</div>
+            <div class="caption-card__city">Shimla, Himachal Pradesh</div>
+          </div>
+        </a>
+
+        <!-- Property 7 -->
+        <a href="booking.html" class="caption-card"
+           style="background: url('https://images.unsplash.com/photo-1510798831971-661eb04b3739?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80') center/cover;" aria-label="Veranda Tea Resort Coorg">
+          <div class="room-card-pattern"></div>
+          <div class="caption-card__scrim"></div>
+          <div class="caption-card__body">
+            <div class="caption-card__name">Veranda Tea Resort</div>
+            <div class="caption-card__city">Coorg, Karnataka</div>
+          </div>
+        </a>
+
+        <!-- Property 8 -->
+        <a href="booking.html" class="caption-card"
+           style="background: url('https://images.unsplash.com/photo-1580977276076-ba6caca3e031?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80') center/cover;" aria-label="Veranda Oasis Resort Jaipur">
+          <div class="room-card-pattern"></div>
+          <div class="caption-card__scrim"></div>
+          <div class="caption-card__body">
+            <div class="caption-card__name">Veranda Oasis Resort</div>
+            <div class="caption-card__city">Jaipur, Rajasthan</div>
+          </div>
+        </a>
+
+        <!-- Property 9 -->
+        <a href="booking.html" class="caption-card"
+           style="background: url('https://images.unsplash.com/photo-1549294413-26f195200c16?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80') center/cover;" aria-label="Veranda Heritage Udaipur">
+          <div class="room-card-pattern"></div>
+          <div class="caption-card__scrim"></div>
+          <div class="caption-card__body">
+            <div class="caption-card__name">Veranda Heritage</div>
+            <div class="caption-card__city">Udaipur, Rajasthan</div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════
+       8. MORE FROM VERANDA
+  ═══════════════════════════════════════════════════ -->
+  <section class="section-more section-pad" id="more" aria-labelledby="more-heading">
+    <div class="container">
+      <div class="notched-badge-wrap">
+        <div class="notched-badge">
+          <span class="notched-badge__text" id="more-heading">More From Veranda</span>
+        </div>
+      </div>
+      <div class="section-rule"></div>
+      <p style="text-align:center;margin-bottom:2.5rem;font-size:0.82rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--clr-body);">Heritage objects. Real provenance. The proof behind the promise.</p>
+
+      <div class="grid-3">
+
+        <!-- Heritage 1: Vintage Car -->
+        <div class="heritage-card hbg-1 reveal">
+          <img src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.4;">
+          <!-- Car silhouette SVG -->
+          <svg style="position:absolute;top:50%;left:50%;transform:translate(-50%,-60%);width:200px;opacity:0.15;" viewBox="0 0 200 80" fill="white">
+            <ellipse cx="100" cy="65" rx="95" ry="8" opacity="0.3"/>
+            <rect x="10" y="40" width="180" height="25" rx="4"/>
+            <path d="M40 40 L60 15 L140 15 L160 40" fill="white"/>
+            <circle cx="45" cy="65" r="14" fill="none" stroke="white" stroke-width="4"/>
+            <circle cx="155" cy="65" r="14" fill="none" stroke="white" stroke-width="4"/>
+            <circle cx="45" cy="65" r="5" fill="white"/>
+            <circle cx="155" cy="65" r="5" fill="white"/>
+          </svg>
+          <div class="heritage-card__scrim"></div>
+          <div class="heritage-card__body">
+            <div class="heritage-card__label">Est. 1948 · Heritage Collection</div>
+            <div class="heritage-card__title">The Krishnamurthy Rover</div>
+            <div class="heritage-card__desc">A 1948 Land Rover Series I, the founder's first vehicle used to scout every Veranda property. Displayed beside the entrance of Veranda Lagoon, Bhubaneswar.</div>
+          </div>
+        </div>
+
+        <!-- Heritage 2: Vintage Aircraft -->
+        <div class="heritage-card hbg-2 reveal" style="animation-delay:0.1s;">
+          <img src="https://images.unsplash.com/photo-1559288126-e17f0ea3e2f7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.4;">
+          <!-- Aircraft silhouette -->
+          <svg style="position:absolute;top:50%;left:50%;transform:translate(-50%,-65%);width:220px;opacity:0.15;" viewBox="0 0 220 80" fill="white">
+            <ellipse cx="110" cy="40" rx="90" ry="10" />
+            <path d="M20 40 L110 32 L200 40"/>
+            <path d="M60 40 L50 65 L90 52"/>
+            <path d="M160 40 L170 65 L130 52"/>
+            <ellipse cx="110" cy="40" rx="14" ry="10"/>
+            <path d="M200 40 L220 35 L220 45 Z"/>
+          </svg>
+          <div class="heritage-card__scrim"></div>
+          <div class="heritage-card__body">
+            <div class="heritage-card__label">Est. 1952 · Garden Display</div>
+            <div class="heritage-card__title">The DC-3 Garden Installation</div>
+            <div class="heritage-card__desc">A Douglas DC-3 fuselage, carefully preserved and installed as a centrepiece of the heritage garden at Veranda Manor, Jungpana. Commissioned by the founder in 1989.</div>
+          </div>
+        </div>
+
+        <!-- Heritage 3: Grand Piano -->
+        <div class="heritage-card hbg-3 reveal" style="animation-delay:0.2s;">
+          <img src="https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.4;">
+          <!-- Piano silhouette -->
+          <svg style="position:absolute;top:50%;left:50%;transform:translate(-50%,-65%);width:180px;opacity:0.15;" viewBox="0 0 180 100" fill="white">
+            <path d="M10 30 Q10 20 20 20 L160 20 Q180 20 180 40 L180 80 L10 80 Z"/>
+            <path d="M10 80 L30 100 L150 100 L180 80"/>
+            <rect x="40" y="22" width="8" height="25" rx="2"/>
+            <rect x="60" y="22" width="8" height="25" rx="2"/>
+            <rect x="90" y="22" width="8" height="25" rx="2"/>
+            <rect x="110" y="22" width="8" height="25" rx="2"/>
+            <rect x="130" y="22" width="8" height="25" rx="2"/>
+          </svg>
+          <div class="heritage-card__scrim"></div>
+          <div class="heritage-card__body">
+            <div class="heritage-card__label">Est. 1923 · Steinway & Sons</div>
+            <div class="heritage-card__title">The Grand Piano of Coorg</div>
+            <div class="heritage-card__desc">A 1923 Steinway Model D concert grand, once performed on by Ustad Vilayat Khan. Now resident at Veranda Tea Resort, Coorg — still tuned, still played every Sunday evening.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- Footer -->
+<div id="footer-wrapper"></div>
+
+<!-- ─── Scripts ─────────────────────────────────────────────── -->
+<script src="js/components.js"></script>
+<script src="js/carousel.js"></script>
+<script src="js/booking-widget.js"></script>
+<script>
+  // Initialize shared components
+  renderComponents('home');
+
+  // Hero Carousel
+  const heroCarousel = new Carousel('#hero-carousel', {
+    autoPlay: true,
+    interval: 6000
+  });
+
+  // Explore Carousel
+  const exploreCarousel = new Carousel('#explore-carousel', {
+    autoPlay: false
+  });
+
+  // Booking Widget
+  const bookingWidget = new BookingWidget('booking-widget-container');
+
+  // Tagline rotation
+  const taglines = [
+    'Where Nature Meets Unmatched Luxury',
+    'Twelve Properties. One Timeless Promise.',
+    'Crafting India\'s Most Cherished Escapes'
+  ];
+  let taglineIdx = 0;
+  const taglineEl = document.getElementById('tagline-text');
+  const taglineDots = document.querySelectorAll('#tagline-dots .carousel__dot');
+
+  setInterval(() => {
+    taglineIdx = (taglineIdx + 1) % taglines.length;
+    if (taglineEl) {
+      taglineEl.style.opacity = '0';
+      taglineEl.style.transform = 'translateY(10px)';
+      setTimeout(() => {
+        taglineEl.textContent = taglines[taglineIdx];
+        taglineEl.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        taglineEl.style.opacity = '1';
+        taglineEl.style.transform = 'translateY(0)';
+      }, 300);
+    }
+    taglineDots.forEach((d, i) => {
+      d.classList.toggle('active', i === taglineIdx);
+      d.style.background = i === taglineIdx ? '#8B4513' : 'rgba(139,69,19,0.3)';
+    });
+  }, 4000);
+
+  // Transition style for tagline
+  if (taglineEl) {
+    taglineEl.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+  }
+</script>
+
+</body>
+</html>

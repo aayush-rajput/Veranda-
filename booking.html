@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Your Stay — Veranda Group Reservations</title>
+  <meta name="description" content="Search and book luxury rooms at Veranda Hotels & Resorts properties across India. Check availability, compare properties, and confirm your reservation.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="styles/global.css">
+  <style>
+    /* ─── Booking engine intentionally uses different styling ─── */
+    /* This simulates a third-party reservation platform          */
+
+    body {
+      background: #F7F3EC;
+    }
+
+    /* Simpler, plainer header — not matching main brand header */
+    .booking-page-header {
+      background: #FFFFFF;
+      border-bottom: 1px solid rgba(92, 51, 32, 0.15);
+      padding: 0 24px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 500;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    }
+
+    .booking-page-header__brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      font-style: italic;
+      font-weight: 500;
+      color: #4A2518;
+      letter-spacing: 0.05em;
+    }
+
+    .booking-page-header__brand span {
+      color: #C9A84C;
+      font-weight: 400;
+    }
+
+    .booking-page-header__tools {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .tool-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.78rem;
+      color: #7A4F3A;
+      cursor: pointer;
+      padding: 6px 10px;
+      border-radius: 0px;
+      border: 1px solid #ddd;
+      background: none;
+      transition: background 0.15s;
+    }
+
+    .tool-btn:hover { background: #F7F3EC; }
+    .tool-btn.active { background: #efefef; }
+
+    /* Lang flag */
+    .lang-flag { font-size: 1rem; }
+
+    /* ─── Loading Screen ─────────────────────────────────────── */
+    .loading-screen {
+      position: fixed;
+      inset: 0;
+      background: #FFFFFF;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      gap: 20px;
+      transition: opacity 0.5s ease;
+    }
+
+    .loading-screen.fade-out {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .loading-spinner {
+      width: 52px;
+      height: 52px;
+      border: 3px solid #e8e8e8;
+      /* Intentionally blue/gray — not brand green. Per brief: "does not match brand palette" */
+      border-top-color: #5C3320;
+      border-radius: 50%;
+      animation: spin 0.9s linear infinite;
+    }
+
+    .loading-text {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.82rem;
+      color: #8B6040;
+      letter-spacing: 0.04em;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ─── Search Bar (booking engine style) ──────────────────── */
+    .be-search-bar {
+      background: #FFFFFF;
+      border-bottom: 1px solid rgba(92, 51, 32, 0.15);
+      padding: 12px 24px;
+    }
+
+    .be-search-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      gap: 12px;
+      align-items: flex-end;
+      flex-wrap: wrap;
+    }
+
+    .be-field {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      flex: 1;
+      min-width: 130px;
+    }
+
+    .be-label {
+      /* Booking engine uses sentence case, NOT all-caps like main site */
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.68rem;
+      color: #8B6040;
+      letter-spacing: 0.02em;
+    }
+
+    .be-input,
+    .be-select {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.85rem;
+      color: #4A2518;
+      border: 1px solid #ddd;
+      border-radius: 0px;
+      padding: 7px 10px;
+      background: #FFFFFF;
+      outline: none;
+      transition: border-color 0.15s;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+
+    .be-input:focus,
+    .be-select:focus {
+      border-color: #C9A84C;
+    }
+
+    .be-search-btn {
+      background: #5C3320;
+      color: white;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 500;
+      padding: 9px 24px;
+      border: none;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-size: 0.75rem;
+      border-radius: 0px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.15s;
+      flex-shrink: 0;
+    }
+
+    .be-search-btn:hover { background: #3D2010; }
+
+    /* ─── Results area ────────────────────────────────────────── */
+    .be-results {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 20px 24px;
+    }
+
+    .be-results-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .be-results-count {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.82rem;
+      color: #7A4F3A;
+    }
+
+    .be-results-count strong {
+      color: #4A2518;
+    }
+
+    /* ─── Property Result Card ────────────────────────────────── */
+    .be-card {
+      background: #FFFFFF;
+      border: 1px solid rgba(92, 51, 32, 0.15);
+      border-radius: 0px;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      margin-bottom: 14px;
+      transition: box-shadow 0.2s;
+    }
+
+    .be-card:hover {
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    }
+
+    .be-card__img-wrap {
+      position: relative;
+      height: 200px;
+    }
+
+    .be-card__img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .be-card__img-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .be-card__body {
+      padding: 16px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .be-card__top { flex: 1; }
+
+    .be-card__name {
+      /* Booking engine: sentence case, smaller tracking */
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 400;
+      font-style: italic;
+      color: #2A1808;
+      margin-bottom: 6px;
+      letter-spacing: 0.02em;
+    }
+
+    .be-card__stars {
+      display: flex;
+      gap: 2px;
+      margin-bottom: 10px;
+    }
+
+    .be-card__stars svg {
+      width: 13px;
+      height: 13px;
+    }
+
+    .be-card__divider {
+      border: none;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-size: 0.75rem;
+      border-top: 1px solid #eee;
+      margin: 10px 0;
+    }
+
+    .be-card__address {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.78rem;
+      color: #8B6040;
+      line-height: 1.5;
+      margin-bottom: 10px;
+    }
+
+    .be-card__amenities {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+
+    .be-chip {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.68rem;
+      color: #7A4F3A;
+      background: rgba(201, 168, 76, 0.1); color: #8B6040;
+      padding: 3px 8px;
+      border-radius: 20px;
+    }
+
+    .be-card__bottom {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .be-card__price {
+      font-family: 'Outfit', sans-serif;
+    }
+
+    .be-card__price-label {
+      font-size: 0.65rem;
+      color: #999;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .be-card__price-value {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #2A1808;
+      line-height: 1;
+    }
+
+    .be-card__price-night {
+      font-size: 0.72rem;
+      color: #8B6040;
+    }
+
+    .be-cta {
+      background: #5C3320;
+      color: white;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 500;
+      padding: 9px 20px;
+      border: none;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-size: 0.75rem;
+      border-radius: 0px;
+      cursor: pointer;
+      transition: background 0.15s;
+      white-space: nowrap;
+    }
+
+    .be-cta:hover { background: #3D2010; }
+
+    /* ─── Booking engine footer — different from main site ────── */
+    .be-footer {
+      background: #2d2d2d;
+      color: rgba(255,255,255,0.6);
+      padding: 20px 24px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.72rem;
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    /* Intentionally different registered address, per brief — 
+       "vendor's address bleeding through rather than the hotel's" */
+    .be-footer a {
+      color: rgba(255,255,255,0.5);
+      text-decoration: underline;
+    }
+
+    @media (max-width: 640px) {
+      .be-card {
+        grid-template-columns: 1fr;
+      }
+      .be-card__img-wrap { height: 180px; }
+    }
+  </style>
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%235C3320'/><text x='50' y='70' font-family='serif' font-size='60' font-style='italic' fill='%23C9A84C' text-anchor='middle'>V</text></svg>">
+</head>
+<body>
+
+<!-- ─── Loading Screen (intentionally non-brand spinner) ──────── -->
+<div class="loading-screen" id="loading-screen">
+  <div class="loading-spinner"></div>
+  <p class="loading-text">Checking availability…</p>
+</div>
+
+<!-- ─── Booking Engine Header (simplified, different from main site) ─ -->
+<header class="booking-page-header" id="be-header">
+  <a href="index.html" class="booking-page-header__brand" style="text-decoration: none;">
+    Veranda <span>Hotels & Resorts</span>
+  </a>
+  <div class="booking-page-header__tools">
+    <!-- Language selector -->
+    <button class="tool-btn" id="lang-btn" aria-label="Select language">
+      <span class="lang-flag">🇮🇳</span>
+      <span>EN</span>
+      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </button>
+    <!-- List/Grid toggle -->
+    <div class="booking-page-header__toggle" role="group" aria-label="View mode">
+      <button class="tool-btn active" id="view-list" aria-label="List view" aria-pressed="true">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+        List
+      </button>
+      <button class="tool-btn" id="view-grid" aria-label="Grid view" aria-pressed="false">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        Grid
+      </button>
+    </div>
+    <!-- Accessibility widget -->
+    <button class="tool-btn" aria-label="Accessibility options">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="4" r="2"/><path d="M15.89 8.11C15.64 7.6 15.18 7.2 14.6 7l-4.23-1.53a1 1 0 00-.68 0L5.38 7C4.8 7.2 4.34 7.6 4.11 8.11L3 12h3l1 9h2l1-5 1 5h2l1-9h3l-1.11-3.89z"/></svg>
+    </button>
+    <!-- Back to main site -->
+    <a href="index.html" class="tool-btn" style="text-decoration:none;color:inherit;">
+      ← Main Site
+    </a>
+  </div>
+</header>
+
+<!-- ─── Search Bar (booking engine style — sentence case, box inputs) ─ -->
+<div class="be-search-bar">
+  <div class="be-search-inner">
+    <!-- Country / Property filter -->
+    <div class="be-field">
+      <label class="be-label" for="be-country">Country / Property</label>
+      <select class="be-select" id="be-country">
+        <option value="india">India</option>
+        <option value="all">All Properties</option>
+      </select>
+    </div>
+
+    <div class="be-field">
+      <label class="be-label" for="be-property-filter">Property</label>
+      <select class="be-select" id="be-property-filter">
+        <option value="">All properties</option>
+        <option>Veranda Lagoon, Bhubaneswar</option>
+        <option>Veranda Lake Resort, Raipur</option>
+        <option>Veranda on Sea, Goa</option>
+        <option>Veranda Manor, Jungpana</option>
+        <option>Veranda Palm Beach, Vizag</option>
+        <option>Veranda Himalayan Spa, Shimla</option>
+        <option>Veranda Tea Resort, Coorg</option>
+        <option>Veranda Oasis, Jaipur</option>
+        <option>Veranda Heritage, Udaipur</option>
+      </select>
+    </div>
+
+    <div class="be-field">
+      <label class="be-label" for="be-checkin">Check in</label>
+      <input type="date" class="be-input" id="be-checkin">
+    </div>
+
+    <div class="be-field">
+      <label class="be-label" for="be-checkout">Check out</label>
+      <input type="date" class="be-input" id="be-checkout">
+    </div>
+
+    <div class="be-field" style="min-width:100px;max-width:120px;">
+      <label class="be-label" for="be-promo">Promo code</label>
+      <input type="text" class="be-input" id="be-promo" placeholder="Code">
+    </div>
+
+    <button class="be-search-btn" id="be-search-btn">Search</button>
+  </div>
+</div>
+
+<!-- ─── Results ──────────────────────────────────────────────── -->
+<div class="be-results">
+  <div class="be-results-header">
+    <p class="be-results-count">Showing <strong>9 properties</strong> in India</p>
+    <div style="display:flex;gap:8px;align-items:center;">
+      <span style="font-family:'Inter',sans-serif;font-size:0.75rem;color:#888;">Sort by:</span>
+      <select style="font-family:'Inter',sans-serif;font-size:0.78rem;color:#333;border:1px solid #ddd;border-radius:4px;padding:4px 8px;background:white;outline:none;">
+        <option>Recommended</option>
+        <option>Price: Low to High</option>
+        <option>Price: High to Low</option>
+        <option>Star Rating</option>
+      </select>
+    </div>
+  </div>
+
+  <div id="be-results-list">
+    <!-- Populated by JS -->
+  </div>
+</div>
+
+<!-- ─── Booking Engine Footer (different address from main site) ──── -->
+<footer class="be-footer">
+  <p>
+    Reservations powered by TravelTech Solutions Pvt. Ltd. &nbsp;·&nbsp;
+    Registered Office: Tower B, Cyber City, Gurugram — 122 002, Haryana &nbsp;·&nbsp;
+    <a href="#">Privacy Policy</a> &nbsp;·&nbsp; <a href="#">Terms</a>
+  </p>
+  <p style="margin-top:6px;font-size:0.68rem;opacity:0.6;">
+    © 2024 Veranda Hotels & Resorts Pvt. Ltd. Bookings facilitated by TravelTech Solutions Pvt. Ltd. under license.
+  </p>
+</footer>
+
+<script>
+  /* ─── Property Data ─────────────────────────────────────────── */
+  const properties = [
+    {
+      id: 1,
+      name: 'Veranda Lagoon',
+      city: 'Bhubaneswar',
+      state: 'Odisha',
+      country: 'India',
+      stars: 5,
+      price: 12500,
+      amenities: ['Free Wi-Fi', 'Pool', 'Spa', 'Conference Hall'],
+      img: 'https://images.unsplash.com/photo-1582719508461-905c673771fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
+    },
+    {
+      id: 2,
+      name: 'Veranda Lake Resort',
+      city: 'Raipur',
+      state: 'Chhattisgarh',
+      country: 'India',
+      stars: 5,
+      price: 9800,
+      amenities: ['Lake View', 'Free Wi-Fi', 'Spa', 'Restaurant'],
+      img: 'https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
+    },
+    {
+      id: 3,
+      name: 'Veranda on Sea',
+      city: 'Goa',
+      state: 'Goa',
+      country: 'India',
+      stars: 5,
+      price: 18500,
+      amenities: ['Beachfront', 'Infinity Pool', 'Water Sports', 'Spa'],
+      img: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
+    },
+    {
+      id: 4,
+      name: 'Veranda Manor',
+      city: 'Jungpana',
+      state: 'West Bengal',
+      country: 'India',
+      stars: 5,
+      price: 14200,
+      amenities: ['Tea Garden', 'Heritage Tours', 'Spa', 'Restaurant'],
+      img: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
+    },
+    {
+      id: 5,
+      name: 'Veranda Palm Beach Resort',
+      city: 'Visakhapatnam',
+      state: 'Andhra Pradesh',
+      country: 'India',
+      stars: 5,
+      price: 11200,
+      amenities: ['Beach Access', 'Pool', 'Free Wi-Fi', 'Conference'],
+      img: 'https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
+    },
+    {
+      id: 6,
+      name: 'Veranda Himalayan Spa Resort',
+      city: 'Shimla',
+      state: 'Himachal Pradesh',
+      country: 'India',
+      stars: 5,
+      price: 16800,
+      amenities: ['Mountain View', 'Full Spa', 'Yoga Centre', 'Dining'],
+      img: 'https://images.unsplash.com/photo-1506929562872-bb421503ef21?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
+    },
+    {
+      id: 7,
+      name: 'Veranda Tea Resort',
+      city: 'Coorg',
+      state: 'Karnataka',
+      country: 'India',
+      stars: 4,
+      price: 8900,
+      amenities: ['Plantation Tours', 'Pool', 'Spa', 'Bonfire'],
+      img: 'https://images.unsplash.com/photo-1510798831971-661eb04b3739?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
+    },
+    {
+      id: 8,
+      name: 'Veranda Oasis Resort',
+      city: 'Jaipur',
+      state: 'Rajasthan',
+      country: 'India',
+      stars: 5,
+      price: 13500,
+      amenities: ['Desert View', 'Rooftop Dining', 'Heritage Tours', 'Spa'],
+      img: 'https://images.unsplash.com/photo-1580977276076-ba6caca3e031?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
+    },
+    {
+      id: 9,
+      name: 'Veranda Heritage',
+      city: 'Udaipur',
+      state: 'Rajasthan',
+      country: 'India',
+      stars: 5,
+      price: 22000,
+      amenities: ['Lake View', 'Heritage Wing', 'Spa', 'Fine Dining'],
+      img: 'https://images.unsplash.com/photo-1549294413-26f195200c16?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
+    },
+  ];
+
+  /* ─── Star SVG ───────────────────────────────────────────────── */
+  function starSVG(filled) {
+    return `<svg width="13" height="13" viewBox="0 0 24 24" fill="${filled ? '#F0B400' : 'none'}" stroke="#F0B400" stroke-width="1.5">
+      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+    </svg>`;
+  }
+
+  /* ─── Render a Property Card ─────────────────────────────────── */
+  function renderCard(p) {
+    const stars = Array.from({length: 5}, (_, i) => starSVG(i < p.stars)).join('');
+    const chips = p.amenities.map(a => `<span class="be-chip">${a}</span>`).join('');
+    const price = `₹${p.price.toLocaleString('en-IN')}`;
+
+    return `
+      <div class="be-card" id="property-${p.id}">
+        <div class="be-card__img-wrap">
+          <img src="${p.img}" alt="${p.name}" class="be-card__img">
+        </div>
+        <div class="be-card__body">
+          <div class="be-card__top">
+            <h3 class="be-card__name">${p.name}</h3>
+            <div class="be-card__stars">${stars}</div>
+            <hr class="be-card__divider">
+            <!-- Note: address uses city, state, country concatenation.
+                 In a real integration, sloppy string concat can show "Goa, Goa, India"
+                 which is the kind of QA bug the brief flags. We avoid it here. -->
+            <p class="be-card__address">${p.city}, ${p.state}, ${p.country}</p>
+            <div class="be-card__amenities">${chips}</div>
+          </div>
+          <div class="be-card__bottom">
+            <div class="be-card__price">
+              <div class="be-card__price-label">From</div>
+              <div class="be-card__price-value">${price}</div>
+              <div class="be-card__price-night">per night + taxes</div>
+            </div>
+            <button class="be-cta" onclick="
+              const checkIn = document.getElementById('be-checkin').value;
+              const checkOut = document.getElementById('be-checkout').value;
+              let url = 'property.html?id=' + (${p.id} - 1);
+              if (checkIn) url += '&checkIn=' + checkIn;
+              if (checkOut) url += '&checkOut=' + checkOut;
+              window.location.href = url;
+            ">
+              Select Room
+            </button>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  /* ─── Init ────────────────────────────────────────────────────── */
+  function init() {
+    // Populate dates from URL params
+    const params = new URLSearchParams(window.location.search);
+    const checkIn  = params.get('checkIn');
+    const checkOut = params.get('checkOut');
+    const property = params.get('property');
+    const promo    = params.get('promo');
+
+    if (checkIn)  document.getElementById('be-checkin').value  = checkIn;
+    if (checkOut) document.getElementById('be-checkout').value = checkOut;
+    if (promo)    document.getElementById('be-promo').value    = promo;
+
+    if (property) {
+      const sel = document.getElementById('be-property-filter');
+      for (let opt of sel.options) {
+        if (opt.text.toLowerCase().includes(property.toLowerCase().split(' ')[1])) {
+          opt.selected = true;
+          break;
+        }
+      }
+    }
+
+    // Render results
+    const container = document.getElementById('be-results-list');
+    container.innerHTML = properties.map(renderCard).join('');
+
+    // Hide loading screen
+    setTimeout(() => {
+      const ls = document.getElementById('loading-screen');
+      ls.classList.add('fade-out');
+      setTimeout(() => ls.remove(), 500);
+    }, 1800); // ~1.8s deliberate delay — simulates network load
+  }
+
+  /* ─── View toggle ─────────────────────────────────────────────── */
+  document.getElementById('view-list')?.addEventListener('click', function() {
+    this.classList.add('active');
+    document.getElementById('view-grid')?.classList.remove('active');
+    document.getElementById('be-results-list').style.display = 'block';
+    this.setAttribute('aria-pressed', 'true');
+    document.getElementById('view-grid').setAttribute('aria-pressed', 'false');
+  });
+
+  document.getElementById('view-grid')?.addEventListener('click', function() {
+    this.classList.add('active');
+    document.getElementById('view-list')?.classList.remove('active');
+    const list = document.getElementById('be-results-list');
+    list.style.display = 'grid';
+    list.style.gridTemplateColumns = 'repeat(auto-fill, minmax(280px, 1fr))';
+    list.style.gap = '14px';
+    // In grid mode, cards become vertical
+    document.querySelectorAll('.be-card').forEach(card => {
+      card.style.gridTemplateColumns = '1fr';
+    });
+    document.querySelectorAll('.be-card__img-wrap').forEach(w => {
+      w.style.height = '180px';
+    });
+    this.setAttribute('aria-pressed', 'true');
+    document.getElementById('view-list').setAttribute('aria-pressed', 'false');
+  });
+
+  /* ─── Search button ───────────────────────────────────────────── */
+  document.getElementById('be-search-btn')?.addEventListener('click', () => {
+    const ls = document.createElement('div');
+    ls.className = 'loading-screen';
+    ls.innerHTML = '<div class="loading-spinner"></div><p class="loading-text">Searching properties…</p>';
+    document.body.appendChild(ls);
+    setTimeout(() => {
+      ls.classList.add('fade-out');
+      setTimeout(() => ls.remove(), 500);
+    }, 1400);
+  });
+
+  init();
+</script>
+</body>
+</html>

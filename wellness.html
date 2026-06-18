@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wellness & Spa — Veranda Hotels & Resorts</title>
+  <meta name="description" content="Rejuvenate your mind, body, and soul at Veranda's signature spas.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/global.css">
+  <style>
+    .wellness-hero {
+      height: 75vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      padding: 0 5%;
+    }
+    .wellness-hero__bg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, rgba(28,16,8,0.8), rgba(28,16,8,0.2));
+      z-index: -1;
+    }
+    .wellness-hero__bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.8;
+    }
+    .wellness-hero__content {
+      max-width: 600px;
+    }
+    .wellness-hero__title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 6vw, 5rem);
+      font-style: italic;
+      color: var(--clr-accent);
+      margin-bottom: 1rem;
+      line-height: 1.1;
+    }
+    .wellness-hero__desc {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.9);
+      line-height: 1.6;
+    }
+    
+    .wellness-treatments {
+      padding: var(--space-2xl) 5%;
+      background: var(--clr-white);
+    }
+    .treatment-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .treatment-card {
+      text-align: center;
+      padding: 2rem;
+    }
+    .treatment-card img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 0 auto 1.5rem;
+    }
+    .treatment-card h3 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.4rem;
+      color: var(--clr-dark);
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+    .treatment-card p {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      color: var(--clr-body);
+      line-height: 1.6;
+    }
+  </style>
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%235C3320'/><text x='50' y='70' font-family='serif' font-size='60' font-style='italic' fill='%23C9A84C' text-anchor='middle'>V</text></svg>">
+</head>
+<body>
+  <div id="header-wrapper"></div>
+
+  <section class="wellness-hero">
+    <div class="wellness-hero__bg">
+      <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" alt="Spa wellness">
+    </div>
+    <div class="wellness-hero__content">
+      <h1 class="wellness-hero__title">Sanctuary of Serenity</h1>
+      <p class="wellness-hero__desc">Immerse yourself in ancient healing traditions and modern wellness practices at the Veranda Spa. Realign your energies in an oasis of absolute calm.</p>
+    </div>
+  </section>
+
+  <section class="wellness-treatments">
+    <div class="treatment-grid">
+      <div class="treatment-card">
+        <img src="https://images.unsplash.com/photo-1519823551278-64ac92734fb1?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Ayurveda">
+        <h3>Ayurvedic Therapies</h3>
+        <p>Authentic Indian healing traditions, including Shirodhara and Abhyanga, personalized by our resident Ayurvedic doctors to restore your natural dosha balance.</p>
+      </div>
+      <div class="treatment-card">
+        <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Yoga">
+        <h3>Yoga &amp; Meditation</h3>
+        <p>Find inner peace with guided morning yoga sessions and mindfulness meditation at our scenic outdoor pavilions, available at all resort properties.</p>
+      </div>
+      <div class="treatment-card">
+        <img src="https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Hydrotherapy">
+        <h3>Signature Massages</h3>
+        <p>Release tension with our bespoke deep tissue and aromatherapy massages, using custom-blended essential oils sourced from local botanical gardens.</p>
+      </div>
+    </div>
+  </section>
+
+  <div id="footer-wrapper"></div>
+  <div id="contact-tab-wrapper"></div>
+  <div id="scroll-top-wrapper"></div>
+  <script src="js/components.js"></script>
+  <script>renderComponents();</script>
+</body>
+</html>

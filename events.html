@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Events & Celebrations — Veranda Hotels & Resorts</title>
+  <meta name="description" content="Host your next corporate event, gala, or celebration at Veranda Hotels & Resorts.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/global.css">
+  <style>
+    .events-hero {
+      height: 70vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      padding: 0 5%;
+    }
+    .events-hero__bg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #1C1008, #5C3320);
+      z-index: -1;
+    }
+    .events-hero__bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.5;
+    }
+    .events-hero__content {
+      max-width: 600px;
+    }
+    .events-hero__title {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      font-weight: 700;
+      color: white;
+      text-transform: uppercase;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+    .events-hero__desc {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+    
+    .event-types {
+      padding: var(--space-2xl) 5%;
+      background: var(--clr-bg);
+    }
+    .event-type-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      margin-bottom: 4rem;
+    }
+    .event-type-row:nth-child(even) {
+      direction: rtl;
+    }
+    .event-type-row:nth-child(even) > * {
+      direction: ltr;
+    }
+    .event-type-img {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      border-radius: 8px;
+      box-shadow: var(--shadow-md);
+    }
+    .event-type-content h2 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--clr-dark-text);
+      margin-bottom: 1rem;
+    }
+    .event-type-content p {
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      color: var(--clr-body);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+    .event-features {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 2rem;
+    }
+    .event-features li {
+      position: relative;
+      padding-left: 1.5rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      color: var(--clr-dark-text);
+      margin-bottom: 0.5rem;
+    }
+    .event-features li::before {
+      content: '✦';
+      position: absolute;
+      left: 0;
+      color: var(--clr-accent);
+      font-size: 0.9rem;
+    }
+
+    @media(max-width: 900px) {
+      .event-type-row { grid-template-columns: 1fr; gap: 2rem; }
+      .event-type-row:nth-child(even) { direction: ltr; }
+    }
+  </style>
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%235C3320'/><text x='50' y='70' font-family='serif' font-size='60' font-style='italic' fill='%23C9A84C' text-anchor='middle'>V</text></svg>">
+</head>
+<body>
+  <div id="header-wrapper"></div>
+
+  <section class="events-hero">
+    <div class="events-hero__bg">
+      <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" alt="Event setup">
+    </div>
+    <div class="events-hero__content">
+      <h1 class="events-hero__title">Unforgettable Events</h1>
+      <p class="events-hero__desc">From high-profile corporate galas to intimate family celebrations, our bespoke venues and expert planning team ensure every detail is flawless.</p>
+      <a href="meetings.html" class="btn-primary">Enquire Now</a>
+    </div>
+  </section>
+
+  <section class="event-types">
+    <div class="container">
+      <div class="event-type-row">
+        <img src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Corporate Gala" class="event-type-img">
+        <div class="event-type-content">
+          <h2>Corporate Galas &amp; Banquets</h2>
+          <p>Host your annual gatherings, product launches, or award ceremonies in our grand ballrooms. With state-of-the-art audiovisual tech and premium catering, we elevate your corporate image.</p>
+          <ul class="event-features">
+            <li>Grand Ballrooms seating up to 1000 guests</li>
+            <li>Customized thematic decor and lighting</li>
+            <li>Curated menus by Executive Chefs</li>
+            <li>Dedicated event concierge</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="event-type-row">
+        <img src="https://images.unsplash.com/photo-1530103862676-de8892ebe6ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Private Celebration" class="event-type-img">
+        <div class="event-type-content">
+          <h2>Private Celebrations</h2>
+          <p>Mark life's milestones with elegance. Whether it's an anniversary dinner under the stars or a lively birthday bash, our intimate venues provide the perfect backdrop.</p>
+          <ul class="event-features">
+            <li>Lush outdoor lawns and terrace spaces</li>
+            <li>Personalized party themes</li>
+            <li>Live entertainment arrangements</li>
+            <li>Bespoke cake and dessert stations</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="footer-wrapper"></div>
+  <div id="contact-tab-wrapper"></div>
+  <div id="scroll-top-wrapper"></div>
+  <script src="js/components.js"></script>
+  <script>renderComponents();</script>
+</body>
+</html>

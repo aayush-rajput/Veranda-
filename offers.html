@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exclusive Offers — Veranda Hotels & Resorts</title>
+  <meta name="description" content="Discover exclusive offers, seasonal packages, and luxurious escapes at Veranda Hotels & Resorts.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/global.css">
+  <style>
+    .offers-hero {
+      height: 60vh;
+      min-height: 400px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 2rem;
+    }
+    .offers-hero__bg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #2A1808, #5C3320);
+      z-index: -1;
+    }
+    .offers-hero__bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.4;
+      mix-blend-mode: overlay;
+    }
+    .offers-hero__title {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 700;
+      color: white;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 1rem;
+    }
+    .offers-hero__sub {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.2rem, 3vw, 1.8rem);
+      font-style: italic;
+      color: var(--clr-accent);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    .offers-grid {
+      padding: var(--space-xl) 2rem;
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+    }
+    
+    .offer-card {
+      background: var(--clr-white);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.3s, box-shadow 0.3s;
+      display: flex;
+      flex-direction: column;
+    }
+    .offer-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-md);
+    }
+    .offer-card__img {
+      height: 240px;
+      background: var(--clr-bg);
+      position: relative;
+    }
+    .offer-card__img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .offer-card__badge {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      background: var(--clr-button);
+      color: white;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 6px 12px;
+      border-radius: 4px;
+    }
+    .offer-card__body {
+      padding: 2rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .offer-card__title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--clr-dark-text);
+      margin-bottom: 0.75rem;
+    }
+    .offer-card__desc {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      color: var(--clr-body);
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+      flex: 1;
+    }
+    .offer-card__action {
+      margin-top: auto;
+    }
+  </style>
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%235C3320'/><text x='50' y='70' font-family='serif' font-size='60' font-style='italic' fill='%23C9A84C' text-anchor='middle'>V</text></svg>">
+</head>
+<body>
+  <div id="header-wrapper"></div>
+
+  <section class="offers-hero">
+    <div class="offers-hero__bg">
+      <img src="https://images.unsplash.com/photo-1510798831971-661eb04b3739?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" alt="Luxury escape">
+    </div>
+    <div>
+      <h1 class="offers-hero__title">Exclusive Offers</h1>
+      <p class="offers-hero__sub">Curated experiences and exceptional value for your next getaway.</p>
+    </div>
+  </section>
+
+  <div class="offers-grid">
+    <!-- Offer 1 -->
+    <div class="offer-card">
+      <div class="offer-card__img">
+        <div class="offer-card__badge">Advance Purchase</div>
+        <img src="https://images.unsplash.com/photo-1578683010236-d716f9a3f461?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Advance purchase">
+      </div>
+      <div class="offer-card__body">
+        <h3 class="offer-card__title">Book Early, Save More</h3>
+        <p class="offer-card__desc">Plan your holiday 14 days in advance and enjoy up to 15% off the Best Available Rate. Includes complimentary breakfast and high-speed Wi-Fi.</p>
+        <div class="offer-card__action">
+          <a href="booking.html?promo=EARLY15" class="btn-primary" style="display:block;text-align:center;">Book Now</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Offer 2 -->
+    <div class="offer-card">
+      <div class="offer-card__img">
+        <div class="offer-card__badge">Stay Longer</div>
+        <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Stay longer">
+      </div>
+      <div class="offer-card__body">
+        <h3 class="offer-card__title">The Extended Escape</h3>
+        <p class="offer-card__desc">Stay for 3 nights or more and receive a 20% discount on your accommodation, plus a complimentary signature dinner for two.</p>
+        <div class="offer-card__action">
+          <a href="booking.html?promo=STAY3" class="btn-primary" style="display:block;text-align:center;">Book Now</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Offer 3 -->
+    <div class="offer-card">
+      <div class="offer-card__img">
+        <div class="offer-card__badge">Wellness</div>
+        <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Wellness package">
+      </div>
+      <div class="offer-card__body">
+        <h3 class="offer-card__title">Spa &amp; Stay Retreat</h3>
+        <p class="offer-card__desc">Rejuvenate your senses with our wellness package. Includes daily breakfast, a 60-minute Ayurvedic massage per person, and access to all hydrotherapy facilities.</p>
+        <div class="offer-card__action">
+          <a href="booking.html?promo=WELLNESS" class="btn-primary" style="display:block;text-align:center;">Book Now</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="footer-wrapper"></div>
+  <div id="contact-tab-wrapper"></div>
+  <div id="scroll-top-wrapper"></div>
+  <script src="js/components.js"></script>
+  <script>renderComponents();</script>
+</body>
+</html>

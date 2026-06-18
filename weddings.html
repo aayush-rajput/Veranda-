@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weddings — Veranda Hotels & Resorts</title>
+  <meta name="description" content="Plan your dream destination wedding at Veranda Hotels & Resorts. Royal Rajput palaces, beachfront ceremonies, and heritage venues.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/global.css">
+  <style>
+    .weddings-hero {
+      height: 80vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 5%;
+    }
+    .weddings-hero__bg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #2A1008, #1A0808);
+      z-index: -1;
+    }
+    .weddings-hero__bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.6;
+    }
+    .weddings-hero__content {
+      max-width: 800px;
+      z-index: 1;
+    }
+    .weddings-hero__title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--clr-accent);
+      margin-bottom: 1rem;
+    }
+    .weddings-hero__sub {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: white;
+      margin-bottom: 2rem;
+    }
+
+    .wedding-themes {
+      padding: var(--space-2xl) 5%;
+      background: var(--clr-white);
+    }
+    .theme-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+    .theme-header h2 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 2.5rem;
+      color: var(--clr-dark);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .theme-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .theme-card {
+      position: relative;
+      height: 400px;
+      overflow: hidden;
+      border-radius: 8px;
+      group: hover;
+    }
+    .theme-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s ease;
+    }
+    .theme-card:hover img {
+      transform: scale(1.05);
+    }
+    .theme-card__overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(28,16,8,0.9), transparent);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 2rem;
+    }
+    .theme-card__title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.5rem;
+      color: white;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.5rem;
+    }
+    .theme-card__desc {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      color: var(--clr-accent);
+      font-size: 1.1rem;
+    }
+  </style>
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%235C3320'/><text x='50' y='70' font-family='serif' font-size='60' font-style='italic' fill='%23C9A84C' text-anchor='middle'>V</text></svg>">
+</head>
+<body>
+  <div id="header-wrapper"></div>
+
+  <section class="weddings-hero">
+    <div class="weddings-hero__bg">
+      <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" alt="Wedding">
+    </div>
+    <div class="weddings-hero__content">
+      <h1 class="weddings-hero__title">The Veranda Wedding</h1>
+      <p class="weddings-hero__sub">A Lifetime of Memories Begins Here</p>
+      <a href="meetings.html" class="btn-primary">Consult Our Specialists</a>
+    </div>
+  </section>
+
+  <section class="wedding-themes">
+    <div class="theme-header">
+      <h2>Curated Wedding Experiences</h2>
+      <p style="font-family:'Inter',sans-serif; color:var(--clr-body); max-width:600px; margin:1rem auto;">From regal palaces in Rajasthan to pristine beaches in Goa, find the perfect canvas for your love story.</p>
+    </div>
+    
+    <div class="theme-grid">
+      <div class="theme-card">
+        <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Royal Rajput">
+        <div class="theme-card__overlay">
+          <div class="theme-card__title">Royal Rajput</div>
+          <div class="theme-card__desc">Udaipur &amp; Jaipur</div>
+        </div>
+      </div>
+      <div class="theme-card">
+        <img src="https://images.unsplash.com/photo-1544928147-79a2dbc1f389?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Beachfront Elegance">
+        <div class="theme-card__overlay">
+          <div class="theme-card__title">Beachfront Elegance</div>
+          <div class="theme-card__desc">Goa &amp; Visakhapatnam</div>
+        </div>
+      </div>
+      <div class="theme-card">
+        <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Heritage Romance">
+        <div class="theme-card__overlay">
+          <div class="theme-card__title">Heritage Romance</div>
+          <div class="theme-card__desc">Shimla &amp; Jungpana</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="footer-wrapper"></div>
+  <div id="contact-tab-wrapper"></div>
+  <div id="scroll-top-wrapper"></div>
+  <script src="js/components.js"></script>
+  <script>renderComponents();</script>
+</body>
+</html>

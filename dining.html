@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dining — Veranda Hotels & Resorts</title>
+  <meta name="description" content="Experience award-winning culinary excellence at Veranda Hotels & Resorts.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/global.css">
+  <style>
+    .dining-hero {
+      height: 60vh;
+      background: linear-gradient(135deg, #1C1008, #3D2010);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .dining-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover;
+      opacity: 0.3;
+      mix-blend-mode: multiply;
+    }
+    .dining-hero h1 {
+      position: relative;
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(3rem, 5vw, 4.5rem);
+      color: white;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 1rem;
+    }
+    .dining-hero p {
+      position: relative;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-style: italic;
+      color: var(--clr-accent);
+    }
+    
+    .dining-section {
+      padding: var(--space-2xl) 5%;
+      background: var(--clr-bg);
+    }
+    .restaurant-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 3rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .restaurant-card {
+      background: var(--clr-white);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+    .restaurant-card img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+    }
+    .restaurant-card__body {
+      padding: 2rem;
+      text-align: center;
+    }
+    .restaurant-card__title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.8rem;
+      color: var(--clr-dark);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+    }
+    .restaurant-card__type {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.75rem;
+      color: var(--clr-logo);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .restaurant-card__desc {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      color: var(--clr-body);
+      line-height: 1.6;
+    }
+  </style>
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%235C3320'/><text x='50' y='70' font-family='serif' font-size='60' font-style='italic' fill='%23C9A84C' text-anchor='middle'>V</text></svg>">
+</head>
+<body>
+  <div id="header-wrapper"></div>
+
+  <section class="dining-hero">
+    <div>
+      <h1>Culinary Excellence</h1>
+      <p>A journey of flavors across Veranda properties</p>
+    </div>
+  </section>
+
+  <section class="dining-section">
+    <div class="restaurant-grid">
+      <div class="restaurant-card">
+        <img src="https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Saffron">
+        <div class="restaurant-card__body">
+          <h3 class="restaurant-card__title">Saffron</h3>
+          <div class="restaurant-card__type">Fine Indian Dining • Udaipur</div>
+          <p class="restaurant-card__desc">Experience the royal recipes of Rajputana in an opulent setting overlooking Lake Pichola. A culinary tribute to heritage.</p>
+        </div>
+      </div>
+      <div class="restaurant-card">
+        <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="The Ocean Grill">
+        <div class="restaurant-card__body">
+          <h3 class="restaurant-card__title">The Ocean Grill</h3>
+          <div class="restaurant-card__type">Seafood &amp; Grill • Goa</div>
+          <p class="restaurant-card__desc">Freshly caught seafood prepared over an open flame, served right on the beach with the sound of the waves as your soundtrack.</p>
+        </div>
+      </div>
+      <div class="restaurant-card">
+        <img src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="1889 Tea Lounge">
+        <div class="restaurant-card__body">
+          <h3 class="restaurant-card__title">1889 Tea Lounge</h3>
+          <div class="restaurant-card__type">High Tea • Jungpana</div>
+          <p class="restaurant-card__desc">Savor artisanal single-estate teas accompanied by delicate pastries in our vintage manor library.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="footer-wrapper"></div>
+  <div id="contact-tab-wrapper"></div>
+  <div id="scroll-top-wrapper"></div>
+  <script src="js/components.js"></script>
+  <script>renderComponents();</script>
+</body>
+</html>
