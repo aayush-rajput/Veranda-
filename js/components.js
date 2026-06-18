@@ -66,7 +66,7 @@ function getHeaderHTML(activePage = '') {
       <!-- Right: Phone + CTA -->
       <div class="header-right">
         <span class="header-right__phone">Central Reservation: +91 80 4747 4747</span>
-        <a href="booking.html" class="btn-book" id="book-stay-btn">
+        <a href="search.html" class="btn-book" id="book-stay-btn">
           Book Your Stay
         </a>
       </div>
@@ -78,7 +78,7 @@ function getHeaderHTML(activePage = '') {
       <button class="nav-drawer__close" id="nav-close-btn" aria-label="Close menu">&times;</button>
 
       <!-- Book CTA inside drawer (visible when header button is hidden at ≤900px) -->
-      <a href="booking.html" style="
+      <a href="search.html" style="
         display:flex;align-items:center;justify-content:center;gap:8px;
         background:var(--clr-button);color:white;
         font-family:var(--font-heading);font-size:0.7rem;font-weight:700;

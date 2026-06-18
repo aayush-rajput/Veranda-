@@ -736,5 +736,20 @@
 
   init();
 </script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Pre-fill dates from URL params if they exist
+      const urlParams = new URLSearchParams(window.location.search);
+      const checkin = urlParams.get('checkin');
+      const checkout = urlParams.get('checkout');
+      
+      if (checkin) {
+        document.getElementById('checkin').value = checkin;
+      }
+      if (checkout) {
+        document.getElementById('checkout').value = checkout;
+      }
+    });
+  </script>
 </body>
 </html>
